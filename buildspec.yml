@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+    pre_build:
+        commands:
+            - echo Entering pre-build phase
+            - pwd
+            - ls
+            - mvn install:install-file -Dfile=ojdbc7-11.2.0.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=11.2.0 -Dpackaging=jar
+            - mvn test
+    build:
+        commands:
+            - echo Build started on `date`
+            - mvn clean package
+            - mv target/k-craft-bacon-0.0.1-SNAPSHOT.war k-craft-bacon-0.0.1-SNAPSHOT.war
+artifacts:
+    files: 
+        - KevinsCraftBacon-Back-0.0.1-SNAPSHOT.war
+        - .ebextensions/**/*
+    
+eb_codebuild_settings:
+    CodeBuildServiceRole: k-craft-bacon-codepipeline-service
+    ComputeType: BUILD_GENERAL1_SMALL
+    Image: aws/codebuild/java:openjdk-8
+    Timeout: 60
+    base-directory: 'target/K-CraftBacon-Back'
