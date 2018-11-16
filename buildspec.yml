@@ -15,7 +15,7 @@ phases:
             - mv target/k-craft-bacon-0.0.1-SNAPSHOT.war k-craft-bacon-0.0.1-SNAPSHOT.war
 artifacts:
     files: 
-        - KevinsCraftBacon-Back-0.0.1-SNAPSHOT.war
+        - k-craft-bacon-0.0.1-SNAPSHOT.war
         - .ebextensions/**/*
     
 eb_codebuild_settings:
