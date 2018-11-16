@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,16 +16,17 @@ public class CreditCardInfo {
 	@Column(name="card_number")
 	private String cardNumber;
 	
-	@Column(name="full_name")
+	@Column(name="card_full_name")
 	private String fullName;
 	
-	@Column(name="security_code")
+	@Column(name="card_security_code")
 	private int securityCode;
 	
-	@Column(name="expiration_date")
+	@Column(name="card_expiration")
 	private String expirationDate;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="cust_id")
 	private Customers customers;
 	
 	CreditCardInfo () {}

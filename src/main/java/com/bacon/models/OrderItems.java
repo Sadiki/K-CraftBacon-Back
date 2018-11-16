@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,33 +21,53 @@ import org.springframework.stereotype.Component;
 public class OrderItems {
 	
 	@Id	
-	@Column(name="order_history_id")
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ord_history_seq")
 	@SequenceGenerator(name = "ord_history_seq", sequenceName ="order_history_seq", allocationSize = 1)
 	private int orderHistoryId;
 	
-	@Column(name="order_id")
-	private int orderId;
+	@Column(name="cust_id")
+	private int custId;
 	
 	@Column(name="quantity")
 	private int quantity;
 	
-	@Column(name="item_id")
-	private int itemId;
+	@Column(name="status")
+	private int status;
+	
+	@OneToOne
+	@JoinColumn(name="special_order_id")
+	private SpecialOrders specialOrder;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="order_id")
 	private Orders orders;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="item_id")
 	private Inventory inventory;
 	
 	OrderItems() {}
 
-	public OrderItems( int quantity, int itemId, Orders orders, Inventory inventory) {
+	public OrderItems(int custId, int quantity, int status, SpecialOrders specialOrder, Orders orders,
+			Inventory inventory) {
 		super();
-		this.orderId = orders.getOrderId();
+		this.custId = custId;
 		this.quantity = quantity;
-		this.itemId = itemId;
+		this.status = status;
+		this.specialOrder = specialOrder;
+		this.orders = orders;
+		this.inventory = inventory;
+	}
+
+	public OrderItems(int orderHistoryId, int custId, int quantity, int status, SpecialOrders specialOrder,
+			Orders orders, Inventory inventory) {
+		super();
+		this.orderHistoryId = orderHistoryId;
+		this.custId = custId;
+		this.quantity = quantity;
+		this.status = status;
+		this.specialOrder = specialOrder;
 		this.orders = orders;
 		this.inventory = inventory;
 	}
@@ -58,12 +80,12 @@ public class OrderItems {
 		this.orderHistoryId = orderHistoryId;
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public int getCustId() {
+		return custId;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setCustId(int custId) {
+		this.custId = custId;
 	}
 
 	public int getQuantity() {
@@ -74,12 +96,20 @@ public class OrderItems {
 		this.quantity = quantity;
 	}
 
-	public int getItemId() {
-		return itemId;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public SpecialOrders getSpecialOrder() {
+		return specialOrder;
+	}
+
+	public void setSpecialOrder(SpecialOrders specialOrder) {
+		this.specialOrder = specialOrder;
 	}
 
 	public Orders getOrders() {
@@ -100,9 +130,10 @@ public class OrderItems {
 
 	@Override
 	public String toString() {
-		return "OrderItems [orderHistoryId=" + orderHistoryId + ", orderId=" + orderId + ", quantity=" + quantity
-				+ ", itemId=" + itemId + ", orders=" + orders + ", inventory=" + inventory + "]";
+		return "OrderItems [custId=" + custId + ", quantity=" + quantity + ", status=" + status + ", specialOrder="
+				+ specialOrder + "]";
 	}
-	
+
+
 	
 }
