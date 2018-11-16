@@ -39,13 +39,13 @@
     			<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
     			<prop key="hibernate.show_sql">true</prop>
     			<prop key="hibernate.format_sql">true</prop>
-    			<prop key="hibernate.hbm2ddl.auto">create</prop>
+    			<prop key="hibernate.hbm2ddl.auto">validate</prop>
     		</props>
     	</property>
     </bean>
     
     <!-- TransactionManager bean -->
-    <bean id="transactionManger" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
   

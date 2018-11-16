@@ -58,7 +58,7 @@ public class Customers {
 	private String zip;
 	
 	@Column(name = "newsletter_option")
-	private boolean newsletter;
+	private int newsletter;
 
 	@OneToMany(mappedBy = "customers" , cascade= CascadeType.ALL)
 	private List<CreditCardInfo> creditCardInfo;
@@ -195,12 +195,12 @@ public class Customers {
 	}
 
 
-	public boolean isNewsletter() {
+	public int isNewsletter() {
 		return newsletter;
 	}
 
 
-	public void setNewsletter(boolean newsletter) {
+	public void setNewsletter(int newsletter) {
 		this.newsletter = newsletter;
 	}
 
