@@ -42,13 +42,13 @@ public class Orders {
 	@Column(name="shipping_status")
 	private int shippingStatus;
 	
-	@Column(name="devliery_method_id")
+	@Column(name="delivery_method_id")
 	private int deliveryMethodId;
 	
-	@Column(name="shipping_price")
+	@Column(name="shipping_price", columnDefinition = "FLOAT(5,2)")
 	private double shippingPrice;
 	
-	@Column(name="order_price")
+	@Column(name="order_price", columnDefinition = "FLOAT(5,2)")
 	private double orderPrice;
 	
 	

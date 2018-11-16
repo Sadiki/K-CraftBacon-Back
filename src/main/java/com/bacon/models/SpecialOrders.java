@@ -31,10 +31,10 @@ public class SpecialOrders {
 	@Column(name ="seasonings")
 	private String seasonings;
 	
-	@Column(name ="weight")
+	@Column(name ="measured_weight", columnDefinition = "FLOAT(5,2)")
 	private double weight;	
 	
-	@Column(name = "special_order_price")
+	@Column(name = "special_order_price", columnDefinition = "FLOAT(5,2)")
 	private double specialOrderPrice;
 	
 	

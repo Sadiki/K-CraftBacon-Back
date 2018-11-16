@@ -1,5 +1,7 @@
 package com.bacon.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +20,14 @@ public class CustomerService {
 		this.custRepo = custRepo;
 	}
 	
-	public Customers login(String username, String password) {
-		
-		return custRepo.login(username, password);
+//	public Customers login(String username, String password) {
+//		
+//		return custRepo.login(username, password);
+//	}
+	
+	public List<Customers> getAll(){
+		System.out.println("service...");
+		return custRepo.getAll();
 	}
+
 }

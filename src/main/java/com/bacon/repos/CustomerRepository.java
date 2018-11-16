@@ -1,5 +1,7 @@
 package com.bacon.repos;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +24,26 @@ public class CustomerRepository {
 		
 	}
 	
-	
-	public Customers login(String username, String password) {
-		
-		System.out.println(sessionFactory);
-		//Establish a session 
+//	
+//	public Customers login(String username, String password) {
+//		
+//		System.out.println(sessionFactory);
+//		//Establish a session 
+//		Session s = sessionFactory.getCurrentSession();
+//		
+//		//Return the user that corresponds with the input parameters
+//		return s.createQuery(("from Customers C where C.username = " + username + " and C.password = " + password), Customers.class).getSingleResult();	
+//		
+//	}
+	public List<Customers> getAll(){
+		System.out.println("repo...");
 		Session s = sessionFactory.getCurrentSession();
-		
-		//Return the user that corresponds with the input parameters
-		return s.createQuery(("from Customers C where C.username = " + username + " and C.password = " + password), Customers.class).getSingleResult();	
-		
+		return s.createQuery("from Customers", Customers.class).getResultList();
 	}
+
 	
-	//
+	
+	
 	
 	
 }

@@ -24,7 +24,7 @@ public class Inventory {
 	@Column(name="item_description")
 	private String itemDescription;
 	
-	@Column(name="item_price")
+	@Column(name="item_price", columnDefinition = "FLOAT(5,2)")
 	private double itemPrice;
 	
 	@Column(name="on_hand_quantity")
