@@ -45,7 +45,7 @@
     </bean>
     
     <!-- TransactionManager bean -->
-    <bean id="transactionManger" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
   
