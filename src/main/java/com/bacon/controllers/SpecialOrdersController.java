@@ -17,7 +17,7 @@ import com.bacon.models.SpecialOrders;
 import com.bacon.services.SpecialOrdersService;
 
 @Controller
-@RequestMapping(value="/special")
+@RequestMapping(value="/bacon/craft")
 public class SpecialOrdersController {
 	
 	private SpecialOrdersService specialOrdersService;

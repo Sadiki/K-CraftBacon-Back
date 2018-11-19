@@ -16,7 +16,7 @@ import com.bacon.models.Orders;
 import com.bacon.services.OrdersService;
 
 @Controller
-@RequestMapping(value="/orders")
+@RequestMapping(value="/profile/orders")
 public class OrdersController {
 	
 	private OrdersService ordersService;

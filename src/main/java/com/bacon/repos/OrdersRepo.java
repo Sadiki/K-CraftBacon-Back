@@ -27,6 +27,7 @@ public class OrdersRepo {
 		return s.createQuery("from Orders", Orders.class).getResultList();
 	}
 	
+	
 	public Orders add(Orders newOrder) {
 		System.out.println("repo");
 		Session s = sessionFactory.getCurrentSession();
