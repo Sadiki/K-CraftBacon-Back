@@ -1,3 +1,4 @@
+
 package com.bacon.models;
 
 import java.util.Date;
@@ -164,6 +165,4 @@ public class Orders {
 				+ ", orderUpdate=" + orderUpdate + ", shippingStatus=" + shippingStatus + ", deliveryMethodId="
 				+ deliveryMethodId + ", shippingPrice=" + shippingPrice + ", orderPrice=" + orderPrice + "]";
 	}
-		
-	
 }
