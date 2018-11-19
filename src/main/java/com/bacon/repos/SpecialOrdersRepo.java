@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bacon.models.CreditCardInfo;
 import com.bacon.models.SpecialOrders;
 
 @Repository
@@ -25,7 +26,7 @@ public class SpecialOrdersRepo {
 	public List<SpecialOrders> getAll(){
 		System.out.println("repo...");
 		Session s = sessionFactory.getCurrentSession();
-		return s.createQuery("from Special_Orders", SpecialOrders.class).getResultList();
+		return s.createQuery("from SpecialOrders", SpecialOrders.class).getResultList();
 	}
 	
 	//add a new special order
@@ -35,4 +36,5 @@ public class SpecialOrdersRepo {
 		s.save(newOrder);
 		return newOrder;
 	}
+	
 }

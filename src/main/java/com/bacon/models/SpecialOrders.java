@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table(name = "Special_Orders")
-
 public class SpecialOrders {
 	
 	@Id

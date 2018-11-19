@@ -23,7 +23,6 @@ public class SpecialOrdersService {
 	
 	//get all orders
 	public List<SpecialOrders> getAll(){
-		System.out.println("service...");
 		return specialOrdersRepo.getAll();
 	}
 	
@@ -31,5 +30,6 @@ public class SpecialOrdersService {
 	public SpecialOrders addSpecialOrder(SpecialOrders newOrder) {
 		return specialOrdersRepo.add(newOrder);
 	}
+	
 	
 }
