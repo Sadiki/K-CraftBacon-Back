@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.bacon.models.Customers;
 import com.bacon.models.Inventory;
 import com.bacon.services.InventoryService;
 
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/inventory")
 public class InventoryController {

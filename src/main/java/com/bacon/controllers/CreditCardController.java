@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/creditcard")
 public class CreditCardController {
@@ -38,7 +40,9 @@ public class CreditCardController {
 
 		// map the incoming Json to an array for quick reference
 		String[] cardDetails = new ObjectMapper().readValue(newCardInfoJson, String[].class);
-
+		for (int i = 0; i<cardDetails.length; i++) {
+			System.out.println(cardDetails[i]);
+		}
 		String cardNumber = cardDetails[0];
 		String fullName  = cardDetails[1];
 		int securityCode = Integer.parseInt(cardDetails[2]);

@@ -6,11 +6,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bacon.models.CreditCardInfo;
 import com.bacon.models.Customers;
 
 @Repository
+@Transactional
 public class CreditCardRepository {
 	
 	protected SessionFactory sessionFactory;
@@ -30,7 +32,6 @@ public class CreditCardRepository {
 	
 	public void addCard(String cardNumber, String fullName, int securityCode, String expirationDate, Customers customer) {
 		Session s = sessionFactory.getCurrentSession();
-		
 		s.save(new CreditCardInfo(cardNumber, fullName, securityCode, expirationDate, customer));
 	}
 	
@@ -38,7 +39,7 @@ public class CreditCardRepository {
 	public List<CreditCardInfo> getByUserId(int userId) {
 		
 		Session s = sessionFactory.getCurrentSession();
-		return  s.createQuery("from CreditCardInfo where custId Like ?0", CreditCardInfo.class).setParameter(0, userId).getResultList();
+		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, userId).getResultList();
 	}
 	
 	public boolean deleteCard(int cardNumber) {
@@ -53,31 +54,13 @@ public class CreditCardRepository {
 		return true;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	//Helper Method
 	public Customers getById(int id) {
-		
+		System.out.println("in cardRepo getById.. id = " + id);
 		Session s = sessionFactory.getCurrentSession();
-		return (Customers) s.createQuery("from Customers where custId Like ?0", Customers.class).setParameter(0, id);
+		s.getTransaction();
+		Customers customer = s.get(Customers.class, id);
+		return customer;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	
 }
