@@ -42,5 +42,96 @@ public class SpecialOrders {
 	public SpecialOrders () {}
 
 
+	public SpecialOrders(String meatType, String smokeFlavor, String seasonings, double weight,
+			double specialOrderPrice) {
+		super();
+		this.meatType = meatType;
+		this.smokeFlavor = smokeFlavor;
+		this.seasonings = seasonings;
+		this.weight = weight;
+		this.specialOrderPrice = specialOrderPrice;
+	}
+
+
+	public SpecialOrders(int specialOrderId, String meatType, String smokeFlavor, String seasonings, double weight,
+			double specialOrderPrice) {
+		super();
+		this.specialOrderId = specialOrderId;
+		this.meatType = meatType;
+		this.smokeFlavor = smokeFlavor;
+		this.seasonings = seasonings;
+		this.weight = weight;
+		this.specialOrderPrice = specialOrderPrice;
+	}
+
+
+	public int getSpecialOrderId() {
+		return specialOrderId;
+	}
+
+
+	public void setSpecialOrderId(int specialOrderId) {
+		this.specialOrderId = specialOrderId;
+	}
+
+
+	public String getMeatType() {
+		return meatType;
+	}
+
+
+	public void setMeatType(String meatType) {
+		this.meatType = meatType;
+	}
+
+
+	public String getSmokeFlavor() {
+		return smokeFlavor;
+	}
+
+
+	public void setSmokeFlavor(String smokeFlavor) {
+		this.smokeFlavor = smokeFlavor;
+	}
+
+
+	public String getSeasonings() {
+		return seasonings;
+	}
+
+
+	public void setSeasonings(String seasonings) {
+		this.seasonings = seasonings;
+	}
+
+
+	public double getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+
+	public double getSpecialOrderPrice() {
+		return specialOrderPrice;
+	}
+
+
+	public void setSpecialOrderPrice(double specialOrderPrice) {
+		this.specialOrderPrice = specialOrderPrice;
+	}
+
+
+	@Override
+	public String toString() {
+		return "SpecialOrders [specialOrderId=" + specialOrderId + ", meatType=" + meatType + ", smokeFlavor="
+				+ smokeFlavor + ", seasonings=" + seasonings + ", weight=" + weight + ", specialOrderPrice="
+				+ specialOrderPrice + "]";
+	}
+
+
 	
 }

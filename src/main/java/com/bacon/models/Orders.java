@@ -1,6 +1,6 @@
 package com.bacon.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,18 +26,24 @@ public class Orders {
 	@SequenceGenerator(name = "ord_seq", sequenceName ="order_seq", allocationSize = 1)
 	private int orderId;
 	
-	@OneToOne
-	@JoinColumn(name = "cust_id")
-	private Customers customers;
+//	@OneToOne
+//	@JoinColumn(name = "cust_id")
+//	private Customers customers;
+
+	@Column(name="cust_id")
+	private int customers;
 	
 	@Column(name="order_status_id")
-	private int orderStatusId;
+	private int orderStatusId;		//hard coded values 1.Order Received 2.Preparing
+											//3. Order Ready For Pickup
+											//4. Order Ready For Delivery
+											//5. Order Out For Delivery 6. Order Complete
 	
 	@Column(name="created_date")
-	private Date createdDate;
+	private LocalDateTime createdDate;
 	
 	@Column(name="order_update")
-	private Date orderUpdate;
+	private LocalDateTime orderUpdate;
 	
 	@Column(name="shipping_status")
 	private int shippingStatus;
@@ -55,7 +61,7 @@ public class Orders {
 	public Orders () {}
 
 	
-	public Orders(Customers customers, int orderStatusId, Date orderUpdate, int shippingStatus, int deliveryMethodId,
+	public Orders(int customers, int orderStatusId, LocalDateTime orderUpdate, int shippingStatus, int deliveryMethodId,
 			double shippingPrice, double orderPrice) {
 		super();
 		this.customers = customers;
@@ -78,12 +84,12 @@ public class Orders {
 	}
 
 
-	public Customers getCustomers() {
+	public int getCustomers() {
 		return customers;
 	}
 
 
-	public void setCustomers(Customers customers) {
+	public void setCustomers(int customers) {
 		this.customers = customers;
 	}
 
@@ -98,22 +104,24 @@ public class Orders {
 	}
 
 
-	public Date getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDateTime createdDate) {
+		createdDate = LocalDateTime.now();
 		this.createdDate = createdDate;
 	}
 
 
-	public Date getOrderUpdate() {
+	public LocalDateTime getOrderUpdate() {
 		return orderUpdate;
 	}
 
 
-	public void setOrderUpdate(Date orderUpdate) {
+	public void setOrderUpdate(LocalDateTime orderUpdate) {
+		createdDate = LocalDateTime.now();
 		this.orderUpdate = orderUpdate;
 	}
 

@@ -20,10 +20,9 @@ public class CustomerService {
 		this.custRepo = custRepo;
 	}
 	
-//	public Customers login(String username, String password) {
-//		
-//		return custRepo.login(username, password);
-//	}
+	public Customers login(String username, String password) {
+		return custRepo.login(username, password);
+	}
 	
 	public List<Customers> getAll(){
 		System.out.println("service...");
