@@ -66,9 +66,25 @@ public class Customers {
 	@OneToMany(mappedBy="customers", cascade= CascadeType.ALL)
 	private List<Orders> orders;
 	
+
+	
+	
+	
 	public Customers () {}
 
 
+	//minuimun args Constructor that complies with tables not null constraints values
+	public Customers(String firstName, String lastName, String username, String password, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+
+
+	//Basic create a user Constructor
 	public Customers(String firstName, String lastName, String username, String password, String email,
 			String phoneNumber, String streetAddress, String city, String state, String zip) {
 		super();
@@ -82,6 +98,24 @@ public class Customers {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+	}
+
+	
+	//Create a user Constructor with newsletter option enabled
+	public Customers(String firstName, String lastName, String username, String password, String email,
+			String phoneNumber, String streetAddress, String city, String state, String zip, int newsletter) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.newsletter = newsletter;
 	}
 
 
