@@ -15,7 +15,7 @@ phases:
             - mv target/k-craft-bacon-0.0.1-SNAPSHOT.war k-craft-bacon-0.0.1-SNAPSHOT.war
 artifacts:
     files: 
-        - KevinsCraftBacon-Back-0.0.1-SNAPSHOT.war
+        - k-craft-bacon-0.0.1-SNAPSHOT.war
         - .ebextensions/**/*
     
 eb_codebuild_settings:
@@ -23,4 +23,4 @@ eb_codebuild_settings:
     ComputeType: BUILD_GENERAL1_SMALL
     Image: aws/codebuild/java:openjdk-8
     Timeout: 60
-    base-directory: 'target/K-CraftBacon-Back'
+    base-directory: 'target/k-craft-bacon'
