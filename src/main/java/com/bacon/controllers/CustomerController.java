@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bacon.models.Customers;
 import com.bacon.services.CustomerService;
 
-
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/customer")
 public class CustomerController {
