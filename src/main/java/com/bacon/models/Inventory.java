@@ -32,7 +32,7 @@ public class Inventory {
 	@Column(name="on_hand_quantity")
 	private int onHandQuantity;
 	
-	@Column(name="item_picture")
+	@Column(name="item_picture", columnDefinition = "BLOB")
 	private String itemPicture;
 	
 	@OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL)
@@ -162,12 +162,6 @@ public class Inventory {
 	public String toString() {
 		return "Inventory [itemId=" + itemId + ", itemName=" + itemName + ", itemDescription=" + itemDescription
 				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
-				+ ", orderItems=" + orderItems + "]";
+				+ "]";
 	}
-
-
-
-	
-
-	
 }
