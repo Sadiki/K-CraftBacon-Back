@@ -1,7 +1,9 @@
 package com.bacon.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import com.bacon.models.CreditCardInfo;
 import com.bacon.models.Inventory;
 import com.bacon.services.CreditCardService;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,15 +42,15 @@ public class CreditCardController {
 	public ResponseEntity addCard(@RequestBody String newCardInfoJson) throws JsonParseException, JsonMappingException, IOException {
 
 		// map the incoming Json to an array for quick reference
-		String[] cardDetails = new ObjectMapper().readValue(newCardInfoJson, String[].class);
-		for (int i = 0; i<cardDetails.length; i++) {
-			System.out.println(cardDetails[i]);
-		}
-		String cardNumber = cardDetails[0];
-		String fullName  = cardDetails[1];
-		int securityCode = Integer.parseInt(cardDetails[2]);
-		String expirationDate =cardDetails[3];
-		int custId = Integer.parseInt(cardDetails[4]);
+		Map<String, String> cardDetails = new HashMap<String, String>();
+		cardDetails = new ObjectMapper().readValue(newCardInfoJson, new TypeReference<Map<String, String>>(){});
+		
+		
+		String cardNumber = cardDetails.get("cardNumber");
+		String fullName  = cardDetails.get("fullName");
+		int securityCode = Integer.parseInt(cardDetails.get("securityCode")); //CHanginh to type to DATE will elimitate extra validation needs that arises from string data type 
+		String expirationDate =cardDetails.get("expirationDate");
+		int custId = Integer.parseInt(cardDetails.get("custId"));
 		
 		if(cardService.addCard(cardNumber, fullName, securityCode, expirationDate, custId))
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -74,6 +77,7 @@ public class CreditCardController {
 	public ResponseEntity<Boolean> deleteCard(@PathVariable int id) {
 		
 		boolean cardDeleted = cardService.deleteCard(id);
+		
 		
 		if(!cardDeleted) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
