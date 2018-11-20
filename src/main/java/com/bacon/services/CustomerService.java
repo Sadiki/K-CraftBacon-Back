@@ -58,9 +58,13 @@ public class CustomerService {
 		
 	}
 	
+	//Retrieve all records from the customers table
 	public List<Customers> getAll(){
 		System.out.println("Inside CustomerService: getAll()");
 		return custRepo.getAll();
 	}
+	
+	
+
 	
 }

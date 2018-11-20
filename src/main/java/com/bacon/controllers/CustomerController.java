@@ -73,33 +73,21 @@ public class CustomerController {
 	public ResponseEntity register(@RequestBody String registerInfoJson) throws JsonParseException, JsonMappingException, IOException {
 		
 		System.out.println("CustomerController: Inside PostMapping/register ");
-		/* Assumed Json Structure for registering a User ->
-		 * firstName 
-		 * lastName
-		 * username
-		 * password
-		 * email
-		 * phoneNumber
-		 * streetAddress
-		 * city
-		 * state
-		 * zip
-		 */
 		
 		//map the incoming Json to an array for quick reference
 		Map<String, String> registrationInfo = new HashMap<String, String>();
 		registrationInfo = new ObjectMapper().readValue(registerInfoJson, new TypeReference<Map<String, String>>(){});
-
 		
 		boolean created = custService.register(registrationInfo);
 		
 		if(!created )
 			return new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE); //Status code 406 conveys already existing username or email
 			
-		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 		
 		
 	}
+	
+	//updating user information 
 
 }
