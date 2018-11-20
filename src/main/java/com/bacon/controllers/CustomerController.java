@@ -44,8 +44,6 @@ public class CustomerController {
 	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customers> login(@RequestBody String loginCredentialsJson) throws JsonParseException, JsonMappingException, IOException {
 
-		System.out.println("CustomerController: Inside PostMapping/login ");
-		
 		//map the incoming Json to an array for quick reference
 		String[] loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, String[].class);
 		

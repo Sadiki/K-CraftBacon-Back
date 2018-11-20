@@ -36,12 +36,12 @@ public class OrdersController {
 		return new ResponseEntity<List<Orders>>(orders,HttpStatus.OK);
 	}
 	
-	//new order
-	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Orders> addOrder(@RequestBody Orders newOrder){
-		System.out.println("Controller...");
-		Orders order = ordersService.addCard(newOrder);
-		return new ResponseEntity<Orders>(order, HttpStatus.CREATED); //Http status code = 201
-	}
+//	//new order
+//	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Orders> addOrder(@RequestBody Orders newOrder){
+//		System.out.println("Controller...");
+//		Orders order = ordersService.addCard(newOrder);
+//		return new ResponseEntity<Orders>(order, HttpStatus.CREATED); //Http status code = 201
+//	}
 	
 }

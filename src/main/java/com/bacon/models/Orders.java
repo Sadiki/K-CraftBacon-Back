@@ -31,7 +31,7 @@ public class Orders {
 	@JoinColumn(name = "cust_id")
 	private Customers customers;
 	
-	@Column(name="order_status_id")
+	@Column(name="order_status_id") //1. received 2. preparing 3. ready 4. complete
 	private int orderStatusId;
 	
 	@Column(name="created_date")
@@ -40,10 +40,10 @@ public class Orders {
 	@Column(name="order_update")
 	private Date orderUpdate;
 	
-	@Column(name="shipping_status")
+	@Column(name="shipping_status")  //1. preparing  2. ready for delivery 3. on its way 4. delivered
 	private int shippingStatus;
 	
-	@Column(name="delivery_method_id")
+	@Column(name="delivery_method_id") //1. pickup 2.delivery
 	private int deliveryMethodId;
 	
 	@Column(name="shipping_price", columnDefinition = "FLOAT(5,2)")

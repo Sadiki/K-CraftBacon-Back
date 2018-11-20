@@ -28,6 +28,7 @@ public class SpecialOrdersController {
 		this.specialOrdersService = specialOrdersService;
 	}
 	
+	//gets all special orders. no practical use. probably going to delete
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<SpecialOrders>> getAll(){
 		System.out.println("controller...");	
@@ -35,17 +36,14 @@ public class SpecialOrdersController {
 		return new ResponseEntity<List<SpecialOrders>>(orders,HttpStatus.OK);
 	}
 	
+	//add new special order
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SpecialOrders> addOrder(@RequestBody SpecialOrders newOrder){
-		System.out.println("Controller...");
 		if (newOrder.getMeatType() == null || newOrder.getSeasonings() == null || newOrder.getSmokeFlavor() == null || newOrder.getSpecialOrderPrice() == 0 || newOrder.getWeight() == 0) {
-			System.out.println("null...");
 			return new ResponseEntity<SpecialOrders>(newOrder, HttpStatus.NOT_ACCEPTABLE);
 		}
 		SpecialOrders order = specialOrdersService.addSpecialOrder(newOrder);
 		return new ResponseEntity<SpecialOrders>(order, HttpStatus.CREATED); //Http status code = 201
 	}
-	
-	
 	
 }
