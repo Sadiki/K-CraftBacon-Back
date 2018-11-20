@@ -1,7 +1,9 @@
 package com.bacon.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bacon.models.Customers;
 import com.bacon.services.CustomerService;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -47,10 +50,11 @@ public class CustomerController {
 		System.out.println("CustomerController: Inside PostMapping/login ");
 		
 		//map the incoming Json to an array for quick reference
-		String[] loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, String[].class);
+		Map<String, String> loginCredentials = new HashMap<String, String>();
+		loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, new TypeReference<Map<String, String>>(){});
 		
-		String username = loginCredentials[0];
-		String password = loginCredentials[1];
+		String username = loginCredentials.get("username");
+		String password = loginCredentials.get("password");
 		
 		System.out.println("CustomerController username ->"+ username +" and password -> "+ password);
 		
@@ -70,20 +74,22 @@ public class CustomerController {
 		
 		System.out.println("CustomerController: Inside PostMapping/register ");
 		/* Assumed Json Structure for registering a User ->
+		 * firstName 
+		 * lastName
 		 * username
-		 * password:
-		 * first name 
-		 * last name:
+		 * password
 		 * email
-		 * phone number
-		 * Street Address
+		 * phoneNumber
+		 * streetAddress
 		 * city
 		 * state
 		 * zip
 		 */
 		
 		//map the incoming Json to an array for quick reference
-		String[] registrationInfo = new ObjectMapper().readValue(registerInfoJson, String[].class);
+		Map<String, String> registrationInfo = new HashMap<String, String>();
+		registrationInfo = new ObjectMapper().readValue(registerInfoJson, new TypeReference<Map<String, String>>(){});
+
 		
 		boolean created = custService.register(registrationInfo);
 		

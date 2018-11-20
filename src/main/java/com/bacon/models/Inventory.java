@@ -32,9 +32,8 @@ public class Inventory {
 	@Column(name="on_hand_quantity")
 	private int onHandQuantity;
 	
-	@Lob
 	@Column(name="item_picture", columnDefinition = "BLOB")
-	private byte[] itemPicture;
+	private String itemPicture;
 	
 
 	
@@ -44,7 +43,7 @@ public class Inventory {
 
 	//Constructor without primary key field
 	public Inventory(String itemName, String itemDescription, double itemPrice, int onHandQuantity,
-			byte[] itemPicture) {
+			String itemPicture) {
 		super();
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
@@ -54,7 +53,7 @@ public class Inventory {
 	}
 
 	public Inventory(int itemId, String itemName, String itemDescription, double itemPrice, int onHandQuantity,
-			byte[] itemPicture) {
+			String itemPicture) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
@@ -104,11 +103,11 @@ public class Inventory {
 		this.onHandQuantity = onHandQuantity;
 	}
 
-	public byte[] getItemPicture() {
+	public String getItemPicture() {
 		return itemPicture;
 	}
 
-	public void setItemPicture(byte[] itemPicture) {
+	public void setItemPicture(String itemPicture) {
 		this.itemPicture = itemPicture;
 	}
 
@@ -119,7 +118,7 @@ public class Inventory {
 		result = prime * result + ((itemDescription == null) ? 0 : itemDescription.hashCode());
 		result = prime * result + itemId;
 		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
-		result = prime * result + Arrays.hashCode(itemPicture);
+		result = prime * result + ((itemPicture == null) ? 0 : itemPicture.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(itemPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -148,7 +147,10 @@ public class Inventory {
 				return false;
 		} else if (!itemName.equals(other.itemName))
 			return false;
-		if (!Arrays.equals(itemPicture, other.itemPicture))
+		if (itemPicture == null) {
+			if (other.itemPicture != null)
+				return false;
+		} else if (!itemPicture.equals(other.itemPicture))
 			return false;
 		if (Double.doubleToLongBits(itemPrice) != Double.doubleToLongBits(other.itemPrice))
 			return false;
@@ -160,9 +162,7 @@ public class Inventory {
 	@Override
 	public String toString() {
 		return "Inventory [itemId=" + itemId + ", itemName=" + itemName + ", itemDescription=" + itemDescription
-				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture="
-				+ Arrays.toString(itemPicture) + "]";
+				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
+				+ "]";
 	}
-
-	
 }
