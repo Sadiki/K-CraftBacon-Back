@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component	
 @Table(name="order_items")
-
 public class OrderItems {
 	
 	@Id	
@@ -130,10 +129,9 @@ public class OrderItems {
 
 	@Override
 	public String toString() {
-		return "OrderItems [custId=" + custId + ", quantity=" + quantity + ", status=" + status + ", specialOrder="
-				+ specialOrder + "]";
+		return "OrderItems [orderHistoryId=" + orderHistoryId + ", custId=" + custId + ", quantity=" + quantity
+				+ ", status=" + status + ", specialOrder=" + specialOrder + ", orders=" + orders + ", inventory="
+				+ inventory + "]";
 	}
 
-
-	
 }

@@ -1,12 +1,12 @@
 package com.bacon.models;
 
-import java.sql.Blob;
-import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -35,9 +35,8 @@ public class Inventory {
 	@Column(name="item_picture", columnDefinition = "BLOB")
 	private String itemPicture;
 	
-
-	
-	
+	@OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL)
+	private List<OrderItems> orderItems;
 	
 	Inventory () {}
 

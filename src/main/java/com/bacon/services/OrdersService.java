@@ -23,13 +23,5 @@ public class OrdersService {
 		System.out.println("service...");
 		return ordersRepo.getAll();
 	}
-	
-	//add new order
-	public Orders addCard(Orders newOrder) {
-		System.out.println("Service");
-		return ordersRepo.add(newOrder);
-	}
-	
-	
-	
+		
 }
