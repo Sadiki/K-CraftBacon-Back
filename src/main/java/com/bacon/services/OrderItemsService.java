@@ -54,10 +54,17 @@ public class OrderItemsService {
 		System.out.println(orderItems);
 		return orderItems;	
 	}
-	//update items from orderstatus 1 to 2
 	
+	//update items from orderstatus 1 to 2
+	public List<OrderItems> updateOrderStatusTo2(int custId, int itemId, int statusId){
+		List<OrderItems> orderItemsRecords = orderItemsRepo.updateOrderStatusTo2(custId, itemId, statusId);	
+		return orderItemsRecords;
+	}
 	//update items from orderstatus 1 to 3 and get orderId
 	
 	//update items from orderstatus 2 to 1
-	
+	public List<OrderItems> updateOrderStatusTo1(int custId, int itemId, int statusId){
+		List<OrderItems> orderItemsRecords = orderItemsRepo.updateOrderStatusTo1(custId, itemId, statusId);	
+		return orderItemsRecords;
+	}
 }
