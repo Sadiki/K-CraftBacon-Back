@@ -166,10 +166,4 @@ public class Inventory {
 				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
 				+ ", orderItems=" + orderItems + "]";
 	}
-
-
-
-	
-
-	
 }

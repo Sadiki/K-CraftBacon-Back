@@ -1,6 +1,8 @@
 package com.bacon.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,22 +27,22 @@ public class CustomerService {
 	}
 	
 	
-	public boolean register(String[] registrationInfo) {
+	public boolean register(Map<String, String> registrationInfo) {
 		System.out.println("Inside CustomerService: register method");
 		
 		List<Customers> existingCust = custRepo.getAll();
 		
 		//Assign registration array elements variables with proper data type, 
-		String username = registrationInfo[0];
-		String password = registrationInfo[1];
-		String firstname = registrationInfo[2];
-		String lastname = registrationInfo[3];
-		String email = registrationInfo[4];
-		String phoneNumber = registrationInfo[5];
-		String streetAddress = registrationInfo[6];
-		String city = registrationInfo[7];
-		String state = registrationInfo[8];
-		String zip = registrationInfo[9];
+		String firstname = registrationInfo.get("firstName");
+		String lastname = registrationInfo.get("lastName");		
+		String username = registrationInfo.get("username");
+		String password = registrationInfo.get("password");
+		String email = registrationInfo.get("email");
+		String phoneNumber = registrationInfo.get("phoneNumber");
+		String streetAddress = registrationInfo.get("streetAddress");
+		String city = registrationInfo.get("city");
+		String state = registrationInfo.get("state");
+		String zip = registrationInfo.get("zip");
 		
 		
 		
