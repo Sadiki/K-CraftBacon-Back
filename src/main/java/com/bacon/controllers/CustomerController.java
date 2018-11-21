@@ -117,17 +117,24 @@ public class CustomerController {
 		});
 
 		int custId = Integer.parseInt(update.get("cust_id"));
-		boolean option = Boolean.parseBoolean(update.get("option"));
+		int option = Integer.parseInt(update.get("newsletter"));
 
 		// depending on the value to option, determines whether the newsletter is
 		// updated to subscribed or unsubscribed
-		if (option) {
+		switch (option) {
+		case 1: 
 			custService.newsletterSignup(custId);
 			return new ResponseEntity<>(HttpStatus.OK);
-		} else {
+		case 0:
 			custService.newsletterUnsubscribe(custId);
 			return new ResponseEntity<>(HttpStatus.OK);
+		default:
+			break;
 		}
+			
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
 
 	}
 

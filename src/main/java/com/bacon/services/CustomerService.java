@@ -97,7 +97,7 @@ public class CustomerService {
 
 	//UNSUBSCRIBING TO A NEWSLETTER
 	public void newsletterUnsubscribe(int custId) {
-		custRepo.newsletterSignup(custId);
+		custRepo.newsletterUnsubscribe(custId);
 	}
 
 	
