@@ -43,13 +43,14 @@ public class CreditCardController {
 	public ResponseEntity addCard(@RequestBody String newCardInfoJson) throws JsonParseException, JsonMappingException, IOException {
 
 		// map the incoming Json to an array for quick reference
+
 		Map<String, String> cardDetails = new HashMap<String, String>();
 		cardDetails = new ObjectMapper().readValue(newCardInfoJson, new TypeReference<Map<String, String>>(){});
 		
 		
 		String cardNumber = cardDetails.get("cardNumber");
 		String fullName  = cardDetails.get("fullName");
-		int securityCode = Integer.parseInt(cardDetails.get("securityCode")); //CHanginh to type to DATE will elimitate extra validation needs that arises from string data type 
+		int securityCode = Integer.parseInt(cardDetails.get("securityCode")); 
 		String expirationDate =cardDetails.get("expirationDate");
 		int custId = Integer.parseInt(cardDetails.get("custId"));
 		

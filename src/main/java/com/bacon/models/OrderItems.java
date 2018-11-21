@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 @Entity
 @Component	
 @Table(name="order_items")
@@ -45,7 +47,7 @@ public class OrderItems {
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name="item_id")
 	private Inventory inventory;
-	
+
 	OrderItems() {}
 
 	public OrderItems(int custId, int quantity, int status, SpecialOrders specialOrder, Orders orders,
@@ -68,6 +70,16 @@ public class OrderItems {
 		this.status = status;
 		this.specialOrder = specialOrder;
 		this.orders = orders;
+		this.inventory = inventory;
+	}
+	
+	
+
+	public OrderItems(int custId, int quantity, int status, Inventory inventory) {
+		super();
+		this.custId = custId;
+		this.quantity = quantity;
+		this.status = status;
 		this.inventory = inventory;
 	}
 
@@ -130,8 +142,8 @@ public class OrderItems {
 	@Override
 	public String toString() {
 		return "OrderItems [orderHistoryId=" + orderHistoryId + ", custId=" + custId + ", quantity=" + quantity
-				+ ", status=" + status + ", specialOrder=" + specialOrder + ", orders=" + orders + ", inventory="
-				+ inventory + "]";
+				+ ", status=" + status + "]";
 	}
+
 
 }
