@@ -38,10 +38,10 @@ public class CreditCardRepository {
 	
 	
 	//Retrieving card(s) by UserId
-	public List<CreditCardInfo> getByUserId(int userId) {
+	public List<CreditCardInfo> getByUserId(int custId) {
 		
 		Session s = sessionFactory.getCurrentSession();
-		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, userId).getResultList();
+		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, custId).getResultList();
 	}
 	
 	
@@ -61,10 +61,11 @@ public class CreditCardRepository {
 	}
 	
 	//Delete a card
-	public boolean deleteCard(int cardNumber) {
+	public boolean deleteCard(String cardNumber) {
 		
 		Session s = sessionFactory.getCurrentSession();
 		CreditCardInfo card = s.get(CreditCardInfo.class, cardNumber);
+		card.setCustomers(null);
 		
 		if(card == null)
 			return false;
