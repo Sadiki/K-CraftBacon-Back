@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 @Entity
 @Component
 @Table(name="inventory")
@@ -32,7 +34,7 @@ public class Inventory {
 	@Column(name="on_hand_quantity")
 	private int onHandQuantity;
 	
-	@Column(name="item_picture", columnDefinition = "BLOB")
+	@Column(name="item_picture")
 	private String itemPicture;
 	
 	@OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL)
@@ -162,6 +164,6 @@ public class Inventory {
 	public String toString() {
 		return "Inventory [itemId=" + itemId + ", itemName=" + itemName + ", itemDescription=" + itemDescription
 				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
-				+ "]";
+				+ ", orderItems=" + orderItems + "]";
 	}
 }
