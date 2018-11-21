@@ -40,9 +40,7 @@ public class CreditCardController {
 
 		// map the incoming Json to an array for quick reference
 		String[] cardDetails = new ObjectMapper().readValue(newCardInfoJson, String[].class);
-		for (int i = 0; i<cardDetails.length; i++) {
-			System.out.println(cardDetails[i]);
-		}
+
 		String cardNumber = cardDetails[0];
 		String fullName  = cardDetails[1];
 		int securityCode = Integer.parseInt(cardDetails[2]);

@@ -26,10 +26,9 @@ public class InventoryService {
 		return invRepo.getAll();
 	}
 	
-	
+
 	
 	public Inventory getItem(int id) {
-	
 		return invRepo.getItem(id);
 	}
 	
