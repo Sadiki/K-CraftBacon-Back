@@ -20,7 +20,6 @@ public class OrdersService {
 	
 	//get all orders
 	public List<Orders> getAll(){
-		System.out.println("service...");
 		return ordersRepo.getAll();
 	}
 		

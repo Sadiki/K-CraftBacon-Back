@@ -28,11 +28,4 @@ public class OrdersRepo {
 		return s.createQuery("from Orders", Orders.class).getResultList();
 	}
 	
-	//add new order
-	public Orders add(Orders newOrder) {
-		Session s = sessionFactory.getCurrentSession();
-		s.save(newOrder);
-		return newOrder;
-	}
-	
 }
