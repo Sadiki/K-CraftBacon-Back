@@ -46,8 +46,7 @@ public class CustomerController {
 
 		// map the incoming Json to an array for quick reference
 		Map<String, String> loginCredentials = new HashMap<String, String>();
-		loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, new TypeReference<Map<String, String>>() {
-		});
+		loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, new TypeReference<Map<String, String>>(){});
 
 		String username = loginCredentials.get("username");
 		String password = loginCredentials.get("password");
@@ -96,9 +95,9 @@ public class CustomerController {
 		Map<String, String> customerUpdate = new HashMap<String, String>();
 		customerUpdate = new ObjectMapper().readValue(customerUpdateJson, new TypeReference<Map<String, String>>() {
 		});
-
-		boolean updated = custService.register(customerUpdate);
-
+		System.out.println(customerUpdate);
+		boolean updated = custService.customerUpdate(customerUpdate);
+		System.out.println();
 		if (!updated)
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE); // Tried to update a unique field with a value
 																	// already preasent in the table(username/email)
