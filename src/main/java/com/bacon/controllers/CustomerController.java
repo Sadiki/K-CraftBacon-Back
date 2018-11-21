@@ -1,4 +1,3 @@
-
 package com.bacon.controllers;
 
 import java.io.IOException;
@@ -137,9 +136,5 @@ public class CustomerController {
 		System.out.println("controller...");
 		List<Customers> customers = custService.getAll();
 		return new ResponseEntity<List<Customers>>(customers, HttpStatus.OK);
-	
-		
-		
 	}
-
 }

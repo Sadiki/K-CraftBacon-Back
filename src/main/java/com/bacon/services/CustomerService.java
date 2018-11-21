@@ -1,6 +1,7 @@
 package com.bacon.services;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +16,13 @@ import com.bacon.repos.CustomerRepository;
 @Service
 @Transactional
 public class CustomerService {
-
 	private CustomerRepository custRepo;
 
 	@Autowired
 	public CustomerService(CustomerRepository custRepo) {
 		this.custRepo = custRepo;
 	}
+
 
 	
 	//LOGING IN
@@ -46,6 +47,7 @@ public class CustomerService {
 		String city = registrationInfo.get("city");
 		String state = registrationInfo.get("state");
 		String zip = registrationInfo.get("zip");
+
 
 		// validate inputs that require validation{email and username }
 		for (Customers c : existingCust)
@@ -97,11 +99,6 @@ public class CustomerService {
 	public void newsletterUnsubscribe(int custId) {
 		custRepo.newsletterSignup(custId);
 	}
-
-	
-	
-	
-	
 	
 	// Retrieving emails from all users who have are signed up for a newsletter
 	public List<String> getAllNewsletterEmails() {
@@ -122,5 +119,6 @@ public class CustomerService {
 		System.out.println("Inside CustomerService: getAll()");
 		return custRepo.getAll();
 	}
+
 
 }
