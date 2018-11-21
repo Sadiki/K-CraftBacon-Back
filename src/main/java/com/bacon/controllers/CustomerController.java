@@ -1,4 +1,5 @@
 
+
 package com.bacon.controllers;
 
 import java.io.IOException;
@@ -100,7 +101,7 @@ public class CustomerController {
 		System.out.println();
 		if (!updated)
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE); // Tried to update a unique field with a value
-																	// already preasent in the table(username/email)
+																	// already present in the table(username/email)
 
 		return new ResponseEntity<>(HttpStatus.OK);
 

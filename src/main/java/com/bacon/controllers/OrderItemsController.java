@@ -45,9 +45,7 @@ public class OrderItemsController {
         orderItemsService.addOrderItem(custId, quantity, inventory);
 		return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
 	}
-	
-	
-	
+		
 	//get items by custId and orderstatus 1 for cart items
 	@PostMapping(value = "/cart" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<OrderItems>> getAllCartItemsById(@RequestBody String userInfoJson) throws JsonParseException, JsonMappingException, IOException{
@@ -89,11 +87,36 @@ public class OrderItemsController {
         List<OrderItems> orderItems = orderItemsService.getAllOrderItemsByOrderId(orderId);
         return new ResponseEntity<List<OrderItems>>(orderItems, HttpStatus.OK);
 	}
-	//update items from orderstatus 1 to 2
 	
+	//update items from orderstatus 1 to 2
+	@PostMapping(value = "/orders/save-for-later" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<OrderItems>> updateOrderStatusTo2(@RequestBody String orderIdJson) throws JsonParseException, JsonMappingException, IOException{
+		System.out.println("controller");
+		Map<String, String> userInfo = new HashMap<String, String>();
+        userInfo = new ObjectMapper().readValue(orderIdJson, new TypeReference<Map<String, String>>(){});
+        
+        int custId = Integer.parseInt(userInfo.get("cust_id"));
+        int itemId = Integer.parseInt(userInfo.get("item_id"));
+        int statusId = 1;
+        System.out.println(custId + " " + itemId);
+        List<OrderItems> orderItems = orderItemsService.updateOrderStatusTo2(custId, itemId, statusId);
+        return new ResponseEntity<List<OrderItems>>(orderItems, HttpStatus.OK);
+	}
 	//update items from orderstatus 1 to 3 and get orderId
 	
 	//update items from orderstatus 2 to 1
-	
+	@PostMapping(value = "/orders/return-to-cart" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<OrderItems>> updateOrderStatusTo1(@RequestBody String orderIdJson) throws JsonParseException, JsonMappingException, IOException{
+		System.out.println("controller");
+		Map<String, String> userInfo = new HashMap<String, String>();
+        userInfo = new ObjectMapper().readValue(orderIdJson, new TypeReference<Map<String, String>>(){});
+        
+        int custId = Integer.parseInt(userInfo.get("cust_id"));
+        int itemId = Integer.parseInt(userInfo.get("item_id"));
+        int statusId = 2;
+        System.out.println(custId + " " + itemId);
+        List<OrderItems> orderItems = orderItemsService.updateOrderStatusTo1(custId, itemId, statusId);
+        return new ResponseEntity<List<OrderItems>>(orderItems, HttpStatus.OK);
+	}
 	
 }

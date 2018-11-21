@@ -24,16 +24,15 @@ public class OrdersRepo {
 	
 	//get all orders
 	public List<Orders> getAll(){
-		System.out.println("repo...");
 		Session s = sessionFactory.getCurrentSession();
 		return s.createQuery("from Orders", Orders.class).getResultList();
 	}
 	
-	
+	//add new order
 	public Orders add(Orders newOrder) {
-		System.out.println("repo");
 		Session s = sessionFactory.getCurrentSession();
 		s.save(newOrder);
 		return newOrder;
 	}
+	
 }
