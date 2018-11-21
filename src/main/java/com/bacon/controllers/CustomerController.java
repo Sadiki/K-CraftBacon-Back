@@ -81,9 +81,10 @@ public class CustomerController {
 																	// or email
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
-
 	}
 
+	
+	
 	// UPDATE A CUSTOMER
 	@PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity customerUpdate(@RequestBody String customerUpdateJson)
@@ -136,6 +137,9 @@ public class CustomerController {
 		System.out.println("controller...");
 		List<Customers> customers = custService.getAll();
 		return new ResponseEntity<List<Customers>>(customers, HttpStatus.OK);
+	
+		
+		
 	}
 
 }
