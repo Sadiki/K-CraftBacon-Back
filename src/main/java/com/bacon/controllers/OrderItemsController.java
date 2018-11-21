@@ -35,7 +35,6 @@ public class OrderItemsController {
 
 	@PostMapping(value="/add", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity addOrderItem(@RequestBody String newOrderItemJson) throws JsonParseException, JsonMappingException, IOException{
-		System.out.println("Controller");
 		Map<String, String> itemDetails = new HashMap<String, String>();
         itemDetails = new ObjectMapper().readValue(newOrderItemJson, new TypeReference<Map<String, String>>(){});
         

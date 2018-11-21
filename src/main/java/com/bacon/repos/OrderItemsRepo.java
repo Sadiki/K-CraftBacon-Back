@@ -28,7 +28,6 @@ public class OrderItemsRepo {
 	//add item to cart
 	public void addOrderItem(int custId, int quantity, Inventory inventoryItem) {
 		System.out.println("repo");
-		//System.out.println("addOrderItem custId: " + custId + " quantity: " + quantity + " inventoryItem: " + inventoryItem);
 		Session s = sessionFactory.getCurrentSession();
 		s.save(new OrderItems(custId, quantity, 1, inventoryItem));
 	}
@@ -41,7 +40,6 @@ public class OrderItemsRepo {
 
 	//get items by orderId
 	public List<OrderItems> getAllOrderItemsByOrderId(int orderId){
-		System.out.println("repo");
 		Session s = sessionFactory.getCurrentSession();
 		return s.createQuery("from OrderItems where order_id Like ?0", OrderItems.class).setParameter(0, orderId).getResultList();
 	}

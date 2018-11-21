@@ -23,9 +23,7 @@ public class OrderItemsService {
 	
 	//add item to cart
 	public void addOrderItem(int custId, int quantity, int inventory) {
-		System.out.println("service - custid: " + custId + " quantity: " + quantity + " inventory: " + inventory);
 		Inventory inventoryItem = orderItemsRepo.getById(inventory);
-		System.out.println("here");
 		orderItemsRepo.addOrderItem(custId, quantity, inventoryItem);
 	}
 	

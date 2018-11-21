@@ -15,6 +15,8 @@ import com.bacon.models.Customers;
 @Transactional
 public class CreditCardRepository {
 	
+	public CreditCardRepository() {}
+	
 	protected SessionFactory sessionFactory;
 
 	@Autowired
@@ -83,6 +85,7 @@ public class CreditCardRepository {
 		Session s = sessionFactory.getCurrentSession();
 		s.getTransaction();
 		Customers customer = s.get(Customers.class, id);
+		System.out.println(customer);
 		return customer;
 	}
 	
