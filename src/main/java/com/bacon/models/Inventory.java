@@ -164,6 +164,6 @@ public class Inventory {
 	public String toString() {
 		return "Inventory [itemId=" + itemId + ", itemName=" + itemName + ", itemDescription=" + itemDescription
 				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
-				+ ", orderItems=" + orderItems + "]";
+				+ "]";
 	}
 }

@@ -45,8 +45,10 @@ public class CreditCardService {
 	}
 	
 	
-	//TODO: update card info
-		//expiration date
+	//update card info
+	public boolean updateCard(String cardNumber, int securityCode, String expirationDate) {
+		return cardRepo.updateCard(cardNumber, securityCode, expirationDate);
+	}
 	
 	
 	
