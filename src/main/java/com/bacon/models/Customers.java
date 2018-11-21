@@ -56,7 +56,7 @@ public class Customers {
 	@Column(name = "zip")
 	private String zip;
 
-	@Column(name = "newsletter_option")
+	@Column(name = "newsletter_option") //0 = not signed up ; 1 = signed up
 	private int newsletter;
 
 	@OneToMany(mappedBy = "customers", cascade = CascadeType.ALL)
@@ -200,7 +200,7 @@ public class Customers {
 		this.zip = zip;
 	}
 
-	public int isNewsletter() {
+	public int getNewsletter() {
 		return newsletter;
 	}
 
