@@ -1,5 +1,6 @@
 package com.bacon.repos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -26,17 +27,22 @@ public class CustomerRepository {
 				"Inside Customer Repository Constructer....SessionFactory up and running: " + this.sessionFactory);
 	}
 
+	//CREATING A CUSTOMER
 	public void register(String firstName, String lastName, String username, String password, String email,
 			String phoneNumber, String streetAddress, String city, String state, String zip) {
 
 		System.out.println("Inside CustomerRepository: register method");
 
 		Session s = sessionFactory.getCurrentSession();
-//		s.beginTransaction();
+		
+		//Setting optional fields to their defualt values
+		int newsletter = 0; // not signed up
+		
 		s.save(new Customers(firstName, lastName, username, password, email, phoneNumber, streetAddress, city, state,
-				zip));
+				zip, newsletter));
 	}
 
+	//LOGING IN
 	public Customers login(String username, String password) {
 		System.out.println("Inside CustomerRepositorys' login method");
 
@@ -58,6 +64,47 @@ public class CustomerRepository {
 
 	}
 
+	//UPDATING A CUSTOMER
+	public boolean updateCustomer(int id, String firstName, String lastName, String username, String password, String email,
+			String phoneNumber, String streetAddress, String city, String state, String zip, int newsletter) {
+		
+		Session s = sessionFactory.getCurrentSession();
+		Customers customer = s.get(Customers.class, id);
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
+		customer.setUsername(username);
+		customer.setPassword(password);
+		customer.setEmail(email);
+		customer.setPhoneNumber(phoneNumber);
+		customer.setStreetAddress(streetAddress);
+		customer.setCity(city);
+		customer.setState(state);
+		customer.setZip(zip);
+		customer.setNewsletter(newsletter);
+		s.save(customer);
+		return true;
+	}
+	
+	//SIGNING UP FOR A NEWSLETTER
+	public void newsletterSignup(int custId) {
+		
+		Session s = sessionFactory.getCurrentSession();
+		Customers customer = s.get(Customers.class, custId);
+		customer.setNewsletter(1);
+		s.save(customer);
+	}
+	
+	//UNSUBSCRIBING TO A NEWSLETER
+	public void newsletterUnsubscribe(int custId) {
+		
+		Session s = sessionFactory.getCurrentSession();
+		Customers customer = s.get(Customers.class, custId);
+		customer.setNewsletter(0);
+		s.save(customer);
+	}
+	
+	
+	
 	public List<Customers> getAll() {
 		System.out.println("Inside CustomerReposiroty: getAll method");
 		Session s = sessionFactory.getCurrentSession();
@@ -66,6 +113,9 @@ public class CustomerRepository {
 	
 	
 	
-	//UPDATING USER FIELDS 
+
+	
+	
+	
 	
 }

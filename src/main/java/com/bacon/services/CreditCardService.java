@@ -25,7 +25,6 @@ public class CreditCardService {
 		//retrieve the customer which corresponds with the given custID
 		Customers customer = cardRepo.getById(custId);
 		if(isUnique(cardNumber)) {
-			System.out.println("true");
 			cardRepo.addCard(cardNumber, fullName, securityCode, expirationDate, customer);
 			return true;
 		}	
@@ -46,8 +45,10 @@ public class CreditCardService {
 	}
 	
 	
-	//TODO: update card info
-		//expiration date
+	//update card info
+	public boolean updateCard(String cardNumber, int securityCode, String expirationDate) {
+		return cardRepo.updateCard(cardNumber, securityCode, expirationDate);
+	}
 	
 	
 	

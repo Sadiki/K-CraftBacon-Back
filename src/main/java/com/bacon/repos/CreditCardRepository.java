@@ -29,19 +29,38 @@ public class CreditCardRepository {
 	}
 	
 	
-	
+	//Adding a card
 	public void addCard(String cardNumber, String fullName, int securityCode, String expirationDate, Customers customer) {
 		Session s = sessionFactory.getCurrentSession();
 		s.save(new CreditCardInfo(cardNumber, fullName, securityCode, expirationDate, customer));
 	}
 	
 	
+	
+	//Retrieving card(s) by UserId
 	public List<CreditCardInfo> getByUserId(int userId) {
 		
 		Session s = sessionFactory.getCurrentSession();
 		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, userId).getResultList();
 	}
 	
+	
+	//UPDATES TO CARD INFORMATION
+	public boolean updateCard(String cardNumber, int securityCode, String expirationDate) {
+		Session s = sessionFactory.getCurrentSession();
+		CreditCardInfo card = s.get(CreditCardInfo.class, cardNumber);
+		
+		//if the card does not exist, update is not possible. Otherwise update
+		if(card == null) {
+			return false;
+		}else {
+			card.setExpirationDate(expirationDate);
+			card.setSecurityCode(securityCode);}
+		
+		return true;
+	}
+	
+	//Delete a card
 	public boolean deleteCard(int cardNumber) {
 		
 		Session s = sessionFactory.getCurrentSession();
@@ -53,6 +72,10 @@ public class CreditCardRepository {
 		s.delete(card);
 		return true;
 	}
+	
+	
+
+	
 	
 	//Helper Method
 	public Customers getById(int id) {
