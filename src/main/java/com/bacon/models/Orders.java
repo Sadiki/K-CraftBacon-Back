@@ -1,6 +1,7 @@
 
 package com.bacon.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class Orders {
 	private int orderStatusId;
 	
 	@Column(name="created_date")
-	private Date createdDate;
+	private LocalDateTime createdDate;
 	
 	@Column(name="order_update")
 	private Date orderUpdate;
@@ -62,6 +63,19 @@ public class Orders {
 		this.customers = customers;
 		this.orderStatusId = orderStatusId;
 		this.orderUpdate = orderUpdate;
+		this.shippingStatus = shippingStatus;
+		this.deliveryMethodId = deliveryMethodId;
+		this.shippingPrice = shippingPrice;
+		this.orderPrice = orderPrice;
+	}
+
+
+	public Orders(Customers customers, int orderStatusId, LocalDateTime createdDate, int shippingStatus,
+			int deliveryMethodId, double shippingPrice, double orderPrice) {
+		super();
+		this.customers = customers;
+		this.orderStatusId = orderStatusId;
+		this.createdDate = createdDate;
 		this.shippingStatus = shippingStatus;
 		this.deliveryMethodId = deliveryMethodId;
 		this.shippingPrice = shippingPrice;
@@ -99,13 +113,13 @@ public class Orders {
 	}
 
 
-	public Date getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setCreatedDate(LocalDateTime localDateTime) {
+		this.createdDate = localDateTime;
 	}
 
 
