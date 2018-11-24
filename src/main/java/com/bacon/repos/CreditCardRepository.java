@@ -75,18 +75,13 @@ public class CreditCardRepository {
 		s.delete(card);
 		return true;
 	}
-	
-	
 
-	
-	
 	//Helper Method
 	public Customers getById(int id) {
 		System.out.println("in cardRepo getById.. id = " + id);
 		Session s = sessionFactory.getCurrentSession();
 		s.getTransaction();
 		Customers customer = s.get(Customers.class, id);
-		System.out.println(customer);
 		return customer;
 	}
 	

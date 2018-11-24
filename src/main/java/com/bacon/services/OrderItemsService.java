@@ -1,8 +1,10 @@
+
 package com.bacon.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class OrderItemsService {
 		this.orderItemsRepo = orderItemsRepo;
 	}
 	
+	public OrderItemsService() {}
+
 	//add item to cart
 	public void addOrderItem(int custId, int quantity, int inventory) {
 		Inventory inventoryItem = orderItemsRepo.getById(inventory);
@@ -29,7 +33,9 @@ public class OrderItemsService {
 	
 	//get items by custId and orderstatus 1 for cart items
 	public List<OrderItems> getAllOrderItemsById(int custId, int statusId){
+		System.out.println("orderitemsservice getallorderitemsbyid");//****************
 		List<OrderItems> orderItemsRecords = orderItemsRepo.getAllOrderItemsById(custId);
+		System.out.println("order items records: " + orderItemsRecords);
 		List<OrderItems> orderItems= new ArrayList();
 		for(OrderItems items: orderItemsRecords) 
 			if(items.getStatus() == statusId)
@@ -62,8 +68,8 @@ public class OrderItemsService {
 	}
 	
 	//update items from orderstatus 1 to 3 -- will be called from Orders class
-	public boolean updateOrderStatusTo3(List<OrderItems> purchasingItems){
-		boolean purchasedItems = orderItemsRepo.updateOrderStatusTo3(purchasingItems);	
+	public boolean updateOrderStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
+		boolean purchasedItems = orderItemsRepo.updateOrderStatusTo3(purchasingItems, newOrder);	
 		return purchasedItems;
 	}
 	
@@ -75,3 +81,4 @@ public class OrderItemsService {
 	
 	//update items from orderstatus 1 to 3 and get orderId
 }
+
