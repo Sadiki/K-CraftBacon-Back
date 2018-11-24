@@ -119,19 +119,6 @@ public class OrderItemsController {
         return new ResponseEntity<List<OrderItems>>(orderItems, HttpStatus.OK);
 	}
 	
-//  update items from orderStatus 1 to 3 -- called from Orders class
-	public boolean updateOrderStatusTo3(int custId, Orders newOrder) {
-		
-		OrderItemsService oic = new OrderItemsService();
-		List<OrderItems> orderItems = oic.getAllOrderItemsById(custId, 1);
-		boolean purchasedItems = orderItemsService.updateOrderStatusTo3(orderItems, newOrder);
-		System.out.println("purchasedItems...." + purchasedItems);//*************
-		if (purchasedItems == false) {
-			return false;
-		}
-		return true;
-	}
-	
 	//delete item from cart or wishlist
 	@PostMapping(value = "/orders/delete-item" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity deleteItem(@RequestBody String orderIdJson) throws JsonParseException, JsonMappingException, IOException{

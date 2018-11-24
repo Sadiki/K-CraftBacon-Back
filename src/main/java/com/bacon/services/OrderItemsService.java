@@ -67,18 +67,12 @@ public class OrderItemsService {
 		return orderItemsRecords;
 	}
 	
-	//update items from orderstatus 1 to 3 -- will be called from Orders class
-	public boolean updateOrderStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
-		boolean purchasedItems = orderItemsRepo.updateOrderStatusTo3(purchasingItems, newOrder);	
-		return purchasedItems;
-	}
-	
+
 	//delete item from cart or wishlist
 	public boolean deleteItem (int custId, int itemId, int statusId){
 		boolean deleted = orderItemsRepo.deleteItem(custId, itemId, statusId);	
 		return deleted;
 	}
 	
-	//update items from orderstatus 1 to 3 and get orderId
 }
 

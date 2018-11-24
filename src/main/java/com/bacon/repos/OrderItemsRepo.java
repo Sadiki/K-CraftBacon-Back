@@ -71,24 +71,6 @@ public class OrderItemsRepo {
 		List<OrderItems> filteredItems = setStatus(orderItems, itemId, statusId);
 		return filteredItems;
 	}
-
-	//update items from orderstatus 1 to 3 -- will be called from Orders class
-	public boolean updateOrderStatusTo3 (List<OrderItems> purchasingItems, Orders newOrder) {
-		for(OrderItems items: purchasingItems) {
-			//if trying to purchase items that are not in cart
-			if(items.getStatus() != 1 ) {
-				return false;
-			}
-		}
-		
-		//make sure cart is not empty. if empty return false
-		if (purchasingItems.isEmpty()) {
-			return false;
-		}
-		
-		List<OrderItems> purchasedItems = setStatusTo3(purchasingItems, newOrder);
-		return true;
-	}
 	
 	//delete item from cart or wishlist
 	public boolean deleteItem (int custId, int itemId, int statusId) {
@@ -145,19 +127,5 @@ public class OrderItemsRepo {
 		}
 		return orderItems;
 	}
-	
-	//Helper method for set the status of order items when purchased
-	public List<OrderItems> setStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
-		List<OrderItems> purchasedItems = new ArrayList();
-		for(OrderItems items: purchasingItems) { 
-			Session s = sessionFactory.getCurrentSession();
-			items.setStatus(3);
-			items.setOrders(newOrder);
-			s.update(items);
-			purchasedItems.add(items);
-		}
-		return purchasedItems;
-	}
-
 }
 

@@ -2,11 +2,13 @@
 package com.bacon.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bacon.models.OrderItems;
 import com.bacon.models.Orders;
 import com.bacon.repos.OrdersRepo;
 
@@ -48,6 +50,23 @@ public class OrdersService {
 	public Orders updateShippingStatus (int orderId, LocalDateTime time, int shippingStatus) {
 		Orders order = ordersRepo.updateShippingStatus(orderId, time, shippingStatus);
 		return order;
+	}
+	
+	public List<OrderItems> getAllOrderItemsById(int custId, int statusId){
+		System.out.println("orderitemsservice getallorderitemsbyid");//****************
+		List<OrderItems> orderItemsRecords = ordersRepo.getAllOrderItemsById(custId);
+		System.out.println("order items records: " + orderItemsRecords);
+		List<OrderItems> orderItems= new ArrayList();
+		for(OrderItems items: orderItemsRecords) 
+			if(items.getStatus() == statusId)
+				orderItems.add(items);		
+		return orderItems;	
+	}
+	
+	//update items from orderstatus 1 to 3 -- will be called from Orders class
+	public boolean updateOrderStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
+		boolean purchasedItems = ordersRepo.updateOrderStatusTo3(purchasingItems, newOrder);	
+		return purchasedItems;
 	}
 	
 }
