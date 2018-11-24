@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping(value = "/profile")
 public class OrderItemsController {
 	
+	public OrderItemsController() {}
+	
 	private OrderItemsService orderItemsService;
 	
 	@Autowired
@@ -117,22 +119,17 @@ public class OrderItemsController {
         return new ResponseEntity<List<OrderItems>>(orderItems, HttpStatus.OK);
 	}
 	
-//  update items from orderStatus 1 to 3 -- will be called from Orders class
-	@PostMapping(value = "/orders/purchase" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity updateOrderStatusTo3(@RequestBody String orderIdJson) throws JsonParseException, JsonMappingException, IOException{
-		Map<String, String> userInfo = new HashMap<String, String>();
-        userInfo = new ObjectMapper().readValue(orderIdJson, new TypeReference<Map<String, String>>(){});
-        
-        int custId = Integer.parseInt(userInfo.get("cust_id"));
-        int statusId = Integer.parseInt(userInfo.get("status_id"));
-		List<OrderItems> orderItems = orderItemsService.getAllOrderItemsById(custId, statusId);
+//  update items from orderStatus 1 to 3 -- called from Orders class
+	public boolean updateOrderStatusTo3(int custId, Orders newOrder) {
 		
-		boolean purchasedItems = orderItemsService.updateOrderStatusTo3(orderItems);
-		
+		OrderItemsService oic = new OrderItemsService();
+		List<OrderItems> orderItems = oic.getAllOrderItemsById(custId, 1);
+		boolean purchasedItems = orderItemsService.updateOrderStatusTo3(orderItems, newOrder);
+		System.out.println("purchasedItems...." + purchasedItems);//*************
 		if (purchasedItems == false) {
-			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			return false;
 		}
-		return new ResponseEntity(HttpStatus.OK);
+		return true;
 	}
 	
 	//delete item from cart or wishlist

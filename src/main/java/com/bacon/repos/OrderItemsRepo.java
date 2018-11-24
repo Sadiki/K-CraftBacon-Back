@@ -13,12 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bacon.models.Inventory;
 import com.bacon.models.OrderItems;
+import com.bacon.models.Orders;
 
 @Repository
 @Transactional
 public class OrderItemsRepo {
 
-	protected SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 	// Constructor that signals spring to create an instance within the bean container
 	@Autowired
 	public OrderItemsRepo(SessionFactory sessionFactory) {
@@ -34,8 +35,12 @@ public class OrderItemsRepo {
 	
 	//get items by custId and orderstatus 1 for cart items and wishlist
 	public List<OrderItems> getAllOrderItemsById(int custId){
+		System.out.println("orderItemsRepo custId: " + custId);
 		Session s = sessionFactory.getCurrentSession();
-		return s.createQuery("from OrderItems where cust_id Like ?0", OrderItems.class).setParameter(0, custId).getResultList();
+		System.out.println(s);
+		List<OrderItems> orderItems= s.createQuery("from OrderItems where cust_id Like ?0", OrderItems.class).setParameter(0, custId).getResultList();
+		System.out.println(orderItems);
+		return orderItems;
 	}
 
 	//get items by orderId
@@ -67,7 +72,7 @@ public class OrderItemsRepo {
 	}
 
 	//update items from orderstatus 1 to 3 -- will be called from Orders class
-	public boolean updateOrderStatusTo3 (List<OrderItems> purchasingItems) {
+	public boolean updateOrderStatusTo3 (List<OrderItems> purchasingItems, Orders newOrder) {
 		for(OrderItems items: purchasingItems) {
 			//if trying to purchase items that are not in cart
 			if(items.getStatus() != 1 ) {
@@ -80,7 +85,7 @@ public class OrderItemsRepo {
 			return false;
 		}
 		
-		List<OrderItems> purchasedItems = setStatusTo3(purchasingItems);
+		List<OrderItems> purchasedItems = setStatusTo3(purchasingItems, newOrder);
 		return true;
 	}
 	
@@ -141,11 +146,12 @@ public class OrderItemsRepo {
 	}
 	
 	//Helper method for set the status of order items when purchased
-	public List<OrderItems> setStatusTo3(List<OrderItems> purchasingItems){
+	public List<OrderItems> setStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
 		List<OrderItems> purchasedItems = new ArrayList();
 		for(OrderItems items: purchasingItems) { 
 			Session s = sessionFactory.getCurrentSession();
 			items.setStatus(3);
+			items.setOrders(newOrder);
 			s.update(items);
 			purchasedItems.add(items);
 		}
