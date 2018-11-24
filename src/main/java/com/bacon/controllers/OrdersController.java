@@ -73,9 +73,19 @@ public class OrdersController {
         //update cart items to purchased and attach new orderId
         OrderItemsController oic = new OrderItemsController();
         System.out.println("New Order: " + newOrder + " --- custId: " + custId); //*******************************
-        boolean cartPurchased = oic.updateOrderStatusTo3(custId, newOrder);
+        boolean cartPurchased = updateOrderStatusTo3(custId, newOrder);
         System.out.println(cartPurchased);//*******************************
         return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
+	}
+	
+	public boolean updateOrderStatusTo3(int custId, Orders newOrder) {
+		List<OrderItems> orderItems = ordersService.getAllOrderItemsById(custId, 1);
+		boolean purchasedItems = ordersService.updateOrderStatusTo3(orderItems, newOrder);
+		System.out.println("purchasedItems...." + purchasedItems);//*************
+		if (purchasedItems == false) {
+			return false;
+		}
+		return true;
 	}
 	
 	//update orderStatus

@@ -1,6 +1,7 @@
 package com.bacon.repos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.Order;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bacon.models.Customers;
+import com.bacon.models.OrderItems;
 import com.bacon.models.Orders;
 import com.bacon.services.OrdersService;
 
@@ -77,6 +79,45 @@ public class OrdersRepo {
 		s.getTransaction();
 		Customers customer = s.get(Customers.class, id);
 		return customer;
+	}
+	
+	public List<OrderItems> getAllOrderItemsById(int custId){
+		System.out.println("orderItemsRepo custId: " + custId);
+		Session s = sessionFactory.getCurrentSession();
+		System.out.println(s);
+		List<OrderItems> orderItems= s.createQuery("from OrderItems where cust_id Like ?0", OrderItems.class).setParameter(0, custId).getResultList();
+		System.out.println(orderItems);
+		return orderItems;
+	}
+	
+	//update items from orderstatus 1 to 3 -- will be called from Orders class
+	public boolean updateOrderStatusTo3 (List<OrderItems> purchasingItems, Orders newOrder) {
+		for(OrderItems items: purchasingItems) {
+			//if trying to purchase items that are not in cart
+			if(items.getStatus() != 1 ) {
+				return false;
+			}
+		}
+		
+		//make sure cart is not empty. if empty return false
+		if (purchasingItems.isEmpty()) {
+			return false;
+		}
+		
+		List<OrderItems> purchasedItems = setStatusTo3(purchasingItems, newOrder);
+		return true;
+	}
+	
+	public List<OrderItems> setStatusTo3(List<OrderItems> purchasingItems, Orders newOrder){
+		List<OrderItems> purchasedItems = new ArrayList();
+		for(OrderItems items: purchasingItems) { 
+			Session s = sessionFactory.getCurrentSession();
+			items.setStatus(3);
+			items.setOrders(newOrder);
+			s.update(items);
+			purchasedItems.add(items);
+		}
+		return purchasedItems;
 	}
 	
 }
