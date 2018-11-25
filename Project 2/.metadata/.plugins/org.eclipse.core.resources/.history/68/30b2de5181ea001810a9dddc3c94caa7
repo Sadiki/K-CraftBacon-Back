@@ -1,0 +1,18 @@
+package com.bacon.repos;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class OrdersRepo {
+
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public void OrdersRepository(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+		System.out.println(this.sessionFactory);
+	}
+	
+}

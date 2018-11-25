@@ -1,0 +1,27 @@
+package com.bacon.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.bacon.models.Orders;
+import com.bacon.models.SpecialOrders;
+
+@Service
+@Transactional
+public class SpecialOrdersService {
+
+	private SpecialOrders specialorders;
+	
+	@Autowired
+	private SpecialOrders (SpecialOrders specialOrders) {
+		this.specialorders = specialOrders;
+	}
+	
+	//add new order
+	public Orders addCard(Orders newOrder) {
+		System.out.println("Service");
+		return ordersRepo.add(newOrder);
+	}
+	
+}

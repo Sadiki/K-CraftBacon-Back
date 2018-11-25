@@ -1,0 +1,19 @@
+package com.bacon.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bacon.services.OrdersService;
+
+@Controller
+@RequestMapping(value="/orders")
+public class OrdersController {
+	
+	private OrdersService ordersService;
+	
+	public OrdersController (OrdersService ordersService) {
+		this.ordersService = ordersService;
+	}
+	
+	
+}

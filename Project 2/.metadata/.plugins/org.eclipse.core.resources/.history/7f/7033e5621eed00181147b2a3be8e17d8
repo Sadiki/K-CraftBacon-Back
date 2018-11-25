@@ -1,0 +1,50 @@
+package com.bacon.repos;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.bacon.models.Inventory;
+import com.bacon.models.OrderItems;
+
+@Repository
+@Transactional
+public class OrderItemsRepo {
+
+	private SessionFactory sessionFactory;
+	// Constructor that signals spring to create an instance within the bean
+	// container
+	@Autowired
+	public OrderItemsRepo(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	//add item to cart
+	public void addOrderItem(int custId, int quantity, Inventory inventoryItem) {
+		System.out.println("addOrderItem custId: " + custId + " quantity: " + quantity + " inventoryItem: " + inventoryItem);
+		Session s = sessionFactory.getCurrentSession();
+		s.beginTransaction();
+		s.save(new OrderItems(custId, quantity, 1, inventoryItem));
+	}
+
+	
+	//get items by custId and orderstatus 1 for cart items
+	
+	//get items by custId and orderstatus 2 for saved for later items
+	
+	//get items by orderId
+	
+	//update items from orderstatus 1 to 2
+	
+	//update items from orderstatus 1 to 3 and get orderId
+	
+	//Helper Method
+	public Inventory getById(int id) {
+		Session s = sessionFactory.getCurrentSession();
+		Inventory inventory = s.get(Inventory.class, id);
+		return inventory;
+	}
+	
+}
