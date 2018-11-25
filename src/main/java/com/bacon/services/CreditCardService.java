@@ -2,6 +2,7 @@ package com.bacon.services;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class CreditCardService {
 		this.cardRepo = cardRepo;			
 	}
 	
+	
+	//Adding a card
 	public boolean addCard(String cardNumber, String fullName, int securityCode, String expirationDate,
 			int custId) {
 		//retrieve the customer which corresponds with the given custID
@@ -33,14 +36,14 @@ public class CreditCardService {
 	
 	
 	//Retrieve card information based on requesting User
-	public List<CreditCardInfo> getByUserId(int userId) {
-		return cardRepo.getByUserId(userId);
+	public List<CreditCardInfo> getByUserId(int custId) {
+		return cardRepo.getByUserId(custId);
 	}
 	
 	
 	
 	//Delete a card
-	public boolean deleteCard(int cardNumber) {
+	public boolean deleteCard(String cardNumber) {
 		return cardRepo.deleteCard(cardNumber);
 	}
 	
@@ -49,9 +52,6 @@ public class CreditCardService {
 	public boolean updateCard(String cardNumber, int securityCode, String expirationDate) {
 		return cardRepo.updateCard(cardNumber, securityCode, expirationDate);
 	}
-	
-	
-	
 	
 	/*HELPER METHOD*/
 	public static boolean isUnique(String cardNumber) {

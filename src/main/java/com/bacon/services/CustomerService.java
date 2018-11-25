@@ -1,3 +1,4 @@
+
 package com.bacon.services;
 
 import java.util.ArrayList;
@@ -98,11 +99,6 @@ public class CustomerService {
 		custRepo.newsletterSignup(custId);
 	}
 
-	
-	
-	
-	
-	
 	// Retrieving emails from all users who have are signed up for a newsletter
 	public List<String> getAllNewsletterEmails() {
 		List<String> newsletterEmails = new ArrayList<>();

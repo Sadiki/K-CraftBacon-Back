@@ -43,7 +43,7 @@ public class CreditCardRepository {
 	public List<CreditCardInfo> getByUserId(int userId) {
 		
 		Session s = sessionFactory.getCurrentSession();
-		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, userId).getResultList();
+		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, custId).getResultList();
 	}
 	
 	
@@ -67,6 +67,7 @@ public class CreditCardRepository {
 		
 		Session s = sessionFactory.getCurrentSession();
 		CreditCardInfo card = s.get(CreditCardInfo.class, cardNumber);
+		card.setCustomers(null);
 		
 		if(card == null)
 			return false;

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +29,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin
-@Controller
+@RestController
 @RequestMapping(value = "/creditcard")
 public class CreditCardController {
 	
@@ -39,6 +40,8 @@ public class CreditCardController {
 		this.cardService = cardService;
 	}
 
+
+	//Adding a card
 	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity addCard(@RequestBody String newCardInfoJson) throws JsonParseException, JsonMappingException, IOException {
 
@@ -52,20 +55,26 @@ public class CreditCardController {
 		String fullName  = cardDetails.get("fullName");
 		int securityCode = Integer.parseInt(cardDetails.get("securityCode")); 
 		String expirationDate =cardDetails.get("expirationDate");
+
 		int custId = Integer.parseInt(cardDetails.get("custId"));
+
 		
 		if(cardService.addCard(cardNumber, fullName, securityCode, expirationDate, custId))
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		
-		//inValide Card number 
+		//invalid Card number 
 		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 	}
 	
-	
+
+
 	@GetMapping(value = "/view",produces= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CreditCardInfo>> getCard(@RequestBody int id){
 		
-		List<CreditCardInfo> record = cardService.getByUserId(id);
+		Map<String, String> info = new HashMap<String, String>();
+		info = new ObjectMapper().readValue(infoJson, new TypeReference<Map<String, String>>(){});
+			
+		List<CreditCardInfo> record = cardService.getByUserId(Integer.parseInt(info.get("cust_id")));
 		
 		if(record.size() == 0)
 			return new ResponseEntity<List<CreditCardInfo>>(record, HttpStatus.NOT_FOUND);
@@ -104,11 +113,37 @@ public class CreditCardController {
 		int cardNumber = Integer.parseInt(deleteDetails.get("cardNumber"));
 		
 		boolean cardDeleted = cardService.deleteCard(cardNumber);
+
+		
+		String cardNumber = updateDetails.get("cardNumber");
+		int securityCode = Integer.parseInt(updateDetails.get("securityCode"));
+		String expirationDate = updateDetails.get("expirationDate");
+		
+		boolean cardUpdated = cardService.updateCard(cardNumber, securityCode, expirationDate);
+		if (!cardUpdated) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	
+	
+	//Deleting a card 
+	@DeleteMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity deleteCard(@RequestBody String deleteCardJson) throws JsonParseException, JsonMappingException, IOException {
+		
+		Map<String, String> deleteDetails = new HashMap<String, String>();
+		deleteDetails = new ObjectMapper().readValue(deleteCardJson, new TypeReference<Map<String, String>>(){});
+		
+		String cardNumber = deleteDetails.get("cardNumber");
+		
+		boolean cardDeleted = cardService.deleteCard(cardNumber);
 		
 		if(!cardDeleted) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
-		return new ResponseEntity<>(cardDeleted, HttpStatus.OK);
-		}
+	}
 }

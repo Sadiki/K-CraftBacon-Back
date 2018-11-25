@@ -67,7 +67,7 @@ public class CustomerRepository {
 	//UPDATING A CUSTOMER
 	public boolean updateCustomer(int id, String firstName, String lastName, String username, String password, String email,
 			String phoneNumber, String streetAddress, String city, String state, String zip, int newsletter) {
-		
+
 		Session s = sessionFactory.getCurrentSession();
 		Customers customer = s.get(Customers.class, id);
 		customer.setFirstName(firstName);
@@ -110,12 +110,5 @@ public class CustomerRepository {
 		Session s = sessionFactory.getCurrentSession();
 		return s.createQuery("from Customers", Customers.class).getResultList();
 	}
-	
-	
-	
-
-	
-	
-	
 	
 }
