@@ -15,8 +15,6 @@ import com.bacon.models.Customers;
 @Transactional
 public class CreditCardRepository {
 	
-	public CreditCardRepository() {}
-	
 	protected SessionFactory sessionFactory;
 
 	@Autowired
@@ -40,7 +38,7 @@ public class CreditCardRepository {
 	
 	
 	//Retrieving card(s) by UserId
-	public List<CreditCardInfo> getByUserId(int userId) {
+	public List<CreditCardInfo> getByUserId(int custId) {
 		
 		Session s = sessionFactory.getCurrentSession();
 		return  s.createQuery("from CreditCardInfo where cust_id Like ?0", CreditCardInfo.class).setParameter(0, custId).getResultList();
@@ -63,7 +61,7 @@ public class CreditCardRepository {
 	}
 	
 	//Delete a card
-	public boolean deleteCard(int cardNumber) {
+	public boolean deleteCard(String cardNumber) {
 		
 		Session s = sessionFactory.getCurrentSession();
 		CreditCardInfo card = s.get(CreditCardInfo.class, cardNumber);
@@ -75,7 +73,11 @@ public class CreditCardRepository {
 		s.delete(card);
 		return true;
 	}
+	
+	
 
+	
+	
 	//Helper Method
 	public Customers getById(int id) {
 		System.out.println("in cardRepo getById.. id = " + id);
