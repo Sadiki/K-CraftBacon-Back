@@ -165,4 +165,5 @@ public class Orders {
 				+ ", orderUpdate=" + orderUpdate + ", shippingStatus=" + shippingStatus + ", deliveryMethodId="
 				+ deliveryMethodId + ", shippingPrice=" + shippingPrice + ", orderPrice=" + orderPrice + "]";
 	}
+
 }

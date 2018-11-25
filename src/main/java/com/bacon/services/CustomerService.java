@@ -47,6 +47,7 @@ public class CustomerService {
 		String city = registrationInfo.get("city");
 		String state = registrationInfo.get("state");
 		String zip = registrationInfo.get("zip");
+		int newsletter = Integer.parseInt(registrationInfo.get("newsletter"));
 
 		// validate inputs that require validation{email and username }
 		for (Customers c : existingCust)
@@ -54,7 +55,7 @@ public class CustomerService {
 				return false;
 
 		// make a call to the repository layer to construct and insert a new user
-		custRepo.register(firstname, lastname, username, password, email, phoneNumber, streetAddress, city, state, zip);
+		custRepo.register(firstname, lastname, username, password, email, phoneNumber, streetAddress, city, state, zip, newsletter);
 		return true;
 
 	}
@@ -77,7 +78,7 @@ public class CustomerService {
 		String zip = customerUpdate.get("zip");
 		int newsletter = Integer.parseInt(customerUpdate.get("newsletter"));
 
-		// validations checking to see if the username or email were changed{if they attempt to change there username or email the updated values should be unique to the table}
+		// validations checking to see if the username or email were changed{if they attempt to change their username or email, the updated values should be unique to the table}
 		for (Customers c : existingCust) {
 			if ((c.getUsername().equals(username) || c.getEmail().equals(email)) && (!(c.getCust_id() == id)))
 				return false;
@@ -100,10 +101,6 @@ public class CustomerService {
 		custRepo.newsletterUnsubscribe(custId);
 	}
 
-	
-	
-	
-	
 	
 	// Retrieving emails from all users who have are signed up for a newsletter
 	public List<String> getAllNewsletterEmails() {
