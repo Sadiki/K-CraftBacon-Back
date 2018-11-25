@@ -110,7 +110,7 @@ public class CreditCardController {
 	
 	
 	//Deleting a card 
-	@DeleteMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity deleteCard(@RequestBody String deleteCardJson) throws JsonParseException, JsonMappingException, IOException {
 		
 		Map<String, String> deleteDetails = new HashMap<String, String>();
