@@ -15,8 +15,6 @@ import com.bacon.models.Customers;
 @Transactional
 public class CreditCardRepository {
 	
-	public CreditCardRepository() {}
-	
 	protected SessionFactory sessionFactory;
 
 	@Autowired
@@ -75,7 +73,11 @@ public class CreditCardRepository {
 		s.delete(card);
 		return true;
 	}
+	
+	
 
+	
+	
 	//Helper Method
 	public Customers getById(int id) {
 		System.out.println("in cardRepo getById.. id = " + id);
