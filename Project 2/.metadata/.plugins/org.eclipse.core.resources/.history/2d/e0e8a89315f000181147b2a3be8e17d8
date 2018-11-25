@@ -1,10 +1,6 @@
-
 package com.bacon.services;
 
-<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/2d/e0e8a89315f000181147b2a3be8e17d8
 import java.time.LocalDateTime;
-=======
->>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/services/OrdersService.java
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -25,10 +21,8 @@ public class OrdersService {
 	
 	//get all orders
 	public List<Orders> getAll(){
-		System.out.println("service...");
 		return ordersRepo.getAll();
 	}
-<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/2d/e0e8a89315f000181147b2a3be8e17d8
 	
 	//get all orders by userId
 	public List<Orders> getAllOrdersByCustId(int custId){
@@ -55,8 +49,4 @@ public class OrdersService {
 		return order;
 	}
 	
-=======
-		
->>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/services/OrdersService.java
 }
-

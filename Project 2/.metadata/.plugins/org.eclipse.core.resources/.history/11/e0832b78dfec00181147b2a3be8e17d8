@@ -43,10 +43,7 @@ public class Inventory {
 	Inventory () {}
 
 	//Constructor without primary key field
-<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/11/e0832b78dfec00181147b2a3be8e17d8
 	@JsonCreator
-=======
->>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/models/Inventory.java
 	public Inventory(String itemName, String itemDescription, double itemPrice, int onHandQuantity,
 			String itemPicture) {
 		super();
@@ -168,7 +165,6 @@ public class Inventory {
 	public String toString() {
 		return "Inventory [itemId=" + itemId + ", itemName=" + itemName + ", itemDescription=" + itemDescription
 				+ ", itemPrice=" + itemPrice + ", onHandQuantity=" + onHandQuantity + ", itemPicture=" + itemPicture
-<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/11/e0832b78dfec00181147b2a3be8e17d8
 				+ ", orderItems=" + orderItems + "]";
 	}
 
@@ -177,8 +173,4 @@ public class Inventory {
 	
 
 	
-=======
-				+ "]";
-	}
->>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/models/Inventory.java
 }
