@@ -77,11 +77,10 @@ public class CustomerService {
 		String zip = customerUpdate.get("zip");
 		int newsletter = Integer.parseInt(customerUpdate.get("newsletter"));
 
-		// validations checking to see if the username or email were changed{if they attempt to change there username or email the updated values should be unique to the table}
-		for (Customers c : existingCust) {
-			if ((c.getUsername().equals(username) || c.getEmail().equals(email)) && (!(c.getCust_id() == id)))
+		// validations
+		for (Customers c : existingCust)
+			if (c.getUsername().equals(username) || c.getEmail().equals(email))
 				return false;
-		}
 
 		// make a call to the repository layer to construct and insert a new user
 		custRepo.updateCustomer(id, firstname, lastname, username, password, email, phoneNumber, streetAddress, city,
@@ -97,14 +96,9 @@ public class CustomerService {
 
 	//UNSUBSCRIBING TO A NEWSLETTER
 	public void newsletterUnsubscribe(int custId) {
-		custRepo.newsletterUnsubscribe(custId);
+		custRepo.newsletterSignup(custId);
 	}
 
-	
-	
-	
-	
-	
 	// Retrieving emails from all users who have are signed up for a newsletter
 	public List<String> getAllNewsletterEmails() {
 		List<String> newsletterEmails = new ArrayList<>();

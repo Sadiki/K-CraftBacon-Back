@@ -53,15 +53,6 @@ public class CreditCardService {
 		return cardRepo.updateCard(cardNumber, securityCode, expirationDate);
 	}
 	
-	
-	//getting all records from credit card table
-	public List<CreditCardInfo> getAll(){
-		return cardRepo.getAll();
-	}
-	
-	
-	
-	
 	/*HELPER METHOD*/
 	public static boolean isUnique(String cardNumber) {
 		List<CreditCardInfo> cards = cardRepo.getAll();
