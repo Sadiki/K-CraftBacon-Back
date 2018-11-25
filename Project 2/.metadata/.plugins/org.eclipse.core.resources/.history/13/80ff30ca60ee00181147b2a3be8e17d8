@@ -1,9 +1,11 @@
+
 package com.bacon.repos;
 
+<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/13/80ff30ca60ee00181147b2a3be8e17d8
 import java.time.LocalDateTime;
+=======
+>>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/repos/OrdersRepo.java
 import java.util.List;
-
-import javax.persistence.criteria.Order;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/13/80ff30ca60ee00181147b2a3be8e17d8
 import com.bacon.models.Customers;
+=======
+>>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/repos/OrdersRepo.java
 import com.bacon.models.Orders;
-import com.bacon.services.OrdersService;
 
 @Repository
 @Transactional
@@ -33,6 +37,7 @@ public class OrdersRepo {
 		return s.createQuery("from Orders", Orders.class).getResultList();
 	}
 	
+<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/13/80ff30ca60ee00181147b2a3be8e17d8
 	//get all orders by userId
 	public List<Orders> getAllOrdersByCustId(int custId){
 		Session s = sessionFactory.getCurrentSession();
@@ -46,12 +51,17 @@ public class OrdersRepo {
 		Orders order = new Orders();
 		order.setCustomers(customer);
 		Orders newOrder = new Orders(customer, orderStatusId, time, shippingStatus, deliveryMethod, shippingPrice, orderPrice);
+=======
+	//add new order
+	public Orders add(Orders newOrder) {
+>>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/repos/OrdersRepo.java
 		Session s = sessionFactory.getCurrentSession();
 		if(newOrder == null)
 			return newOrder;
 		s.save(newOrder);
 		return newOrder;
 	}
+<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/13/80ff30ca60ee00181147b2a3be8e17d8
 	//update orderStatus
 	public Orders updateStatus(int orderId, LocalDateTime time, int orderStatus) {
 		Session s = sessionFactory.getCurrentSession();
@@ -82,5 +92,7 @@ public class OrdersRepo {
 		Customers customer = s.get(Customers.class, id);
 		return customer;
 	}
+=======
+>>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/repos/OrdersRepo.java
 	
 }

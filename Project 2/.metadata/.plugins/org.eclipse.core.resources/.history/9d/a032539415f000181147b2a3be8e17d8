@@ -1,10 +1,6 @@
 package com.bacon.controllers;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bacon.models.OrderItems;
 import com.bacon.models.Orders;
-import com.bacon.services.OrderItemsService;
 import com.bacon.services.OrdersService;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin
 @Controller
@@ -46,6 +36,7 @@ public class OrdersController {
 		return new ResponseEntity<List<Orders>>(orders,HttpStatus.OK);
 	}
 	
+<<<<<<< HEAD:Project 2/.metadata/.plugins/org.eclipse.core.resources/.history/9d/a032539415f000181147b2a3be8e17d8
 	//get all orders by userId
 	@PostMapping(value = "/past-orders" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Orders>> getAllOrdersByCustId(@RequestBody String userInfoJson) throws JsonParseException, JsonMappingException, IOException{
@@ -101,5 +92,15 @@ public class OrdersController {
         Orders orderUpdated = ordersService.updateShippingStatus(orderId, time, shippingStatus);
         return new ResponseEntity<Orders>(orderUpdated, HttpStatus.OK);
 	}
+=======
+//	//new order
+//	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Orders> addOrder(@RequestBody Orders newOrder){
+//		System.out.println("Controller...");
+//		Orders order = ordersService.addCard(newOrder);
+//		return new ResponseEntity<Orders>(order, HttpStatus.CREATED); //Http status code = 201
+//	}
+>>>>>>> ce82b29940b0bd6931080189d6f7c7ee244fb993:src/main/java/com/bacon/controllers/OrdersController.java
 	
 }
+
