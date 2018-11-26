@@ -37,6 +37,11 @@ public class CreditCardService {
 		return cardRepo.getByUserId(userId);
 	}
 	
+	//Retrieve all card information
+	public List<CreditCardInfo> getAll() {
+		return cardRepo.getAll();
+	}
+	
 	
 	
 	//Delete a card
