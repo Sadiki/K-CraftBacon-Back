@@ -39,6 +39,11 @@ public class CreditCardController {
 		this.cardService = cardService;
 	}
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity< List<CreditCardInfo>> getAll(){
+        return new ResponseEntity<>(cardService.getAll(), HttpStatus.OK);
+    }
+	
 	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity addCard(@RequestBody String newCardInfoJson) throws JsonParseException, JsonMappingException, IOException {
 
