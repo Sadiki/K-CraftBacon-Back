@@ -29,11 +29,14 @@ public class CustomerRepository {
 
 	//CREATING A CUSTOMER
 	public void register(String firstName, String lastName, String username, String password, String email,
-			String phoneNumber, String streetAddress, String city, String state, String zip,int newsletter) {
+			String phoneNumber, String streetAddress, String city, String state, String zip) {
 
 		System.out.println("Inside CustomerRepository: register method");
 
 		Session s = sessionFactory.getCurrentSession();
+		
+		//Setting optional fields to their defualt values
+		int newsletter = 0; // not signed up
 		
 		s.save(new Customers(firstName, lastName, username, password, email, phoneNumber, streetAddress, city, state,
 				zip, newsletter));
@@ -64,7 +67,7 @@ public class CustomerRepository {
 	//UPDATING A CUSTOMER
 	public boolean updateCustomer(int id, String firstName, String lastName, String username, String password, String email,
 			String phoneNumber, String streetAddress, String city, String state, String zip, int newsletter) {
-		System.out.println("Inside CustomerRepository: updateCustomer method");
+		
 		Session s = sessionFactory.getCurrentSession();
 		Customers customer = s.get(Customers.class, id);
 		customer.setFirstName(firstName);

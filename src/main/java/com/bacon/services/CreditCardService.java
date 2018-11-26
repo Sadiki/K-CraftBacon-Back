@@ -2,7 +2,6 @@ package com.bacon.services;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +20,6 @@ public class CreditCardService {
 		this.cardRepo = cardRepo;			
 	}
 	
-	
-	//Adding a card
 	public boolean addCard(String cardNumber, String fullName, int securityCode, String expirationDate,
 			int custId) {
 		//retrieve the customer which corresponds with the given custID
@@ -36,14 +33,14 @@ public class CreditCardService {
 	
 	
 	//Retrieve card information based on requesting User
-	public List<CreditCardInfo> getByUserId(int custId) {
-		return cardRepo.getByUserId(custId);
+	public List<CreditCardInfo> getByUserId(int userId) {
+		return cardRepo.getByUserId(userId);
 	}
 	
 	
 	
 	//Delete a card
-	public boolean deleteCard(String cardNumber) {
+	public boolean deleteCard(int cardNumber) {
 		return cardRepo.deleteCard(cardNumber);
 	}
 	
@@ -51,12 +48,6 @@ public class CreditCardService {
 	//update card info
 	public boolean updateCard(String cardNumber, int securityCode, String expirationDate) {
 		return cardRepo.updateCard(cardNumber, securityCode, expirationDate);
-	}
-	
-	
-	//getting all records from credit card table
-	public List<CreditCardInfo> getAll(){
-		return cardRepo.getAll();
 	}
 	
 	

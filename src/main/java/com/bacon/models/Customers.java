@@ -212,10 +212,7 @@ public class Customers {
 	public String toString() {
 		return "Customers [cust_id=" + cust_id + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
 				+ username + ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber
-				+ ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state + ", zip=" + zip
-				+ ", newsletter=" + newsletter + "]";
+				+ ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state + ", zip=" + zip + "]";
 	}
-
-
 
 }

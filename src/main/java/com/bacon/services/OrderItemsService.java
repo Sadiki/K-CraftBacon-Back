@@ -1,9 +1,9 @@
-
 package com.bacon.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,23 +22,23 @@ public class OrderItemsService {
 		this.orderItemsRepo = orderItemsRepo;
 	}
 	
-	//add item to cart
+	public OrderItemsService() {}
 
+	//add item to cart
 	public void addOrderItem(int custId, int quantity, int inventory) {
-		System.out.println("service - custid: " + custId + " quantity: " + quantity + " inventory: " + inventory);
 		Inventory inventoryItem = orderItemsRepo.getById(inventory);
-		System.out.println("here");
 		orderItemsRepo.addOrderItem(custId, quantity, inventoryItem);
 	}
+	
 	//get items by custId and orderstatus 1 for cart items
 	public List<OrderItems> getAllOrderItemsById(int custId, int statusId){
+		System.out.println("orderitemsservice getallorderitemsbyid");//****************
 		List<OrderItems> orderItemsRecords = orderItemsRepo.getAllOrderItemsById(custId);
+		System.out.println("order items records: " + orderItemsRecords);
 		List<OrderItems> orderItems= new ArrayList();
-		
 		for(OrderItems items: orderItemsRecords) 
 			if(items.getStatus() == statusId)
 				orderItems.add(items);		
-		
 		return orderItems;	
 	}
 	
@@ -48,9 +48,7 @@ public class OrderItemsService {
 		List<OrderItems> orderItemsRecords = orderItemsRepo.getAllOrderItemsByOrderId(orderId);
 		List<OrderItems> orderItems= new ArrayList();
 		for(OrderItems items: orderItemsRecords) 
-
 			if(items.getOrders().getOrderId() == orderId)
-
 				orderItems.add(items);		
 		System.out.println(orderItems);
 		return orderItems;	
@@ -61,12 +59,18 @@ public class OrderItemsService {
 		List<OrderItems> orderItemsRecords = orderItemsRepo.updateOrderStatusTo2(custId, itemId, statusId);	
 		return orderItemsRecords;
 	}
-	//update items from orderstatus 1 to 3 and get orderId
 	
 	//update items from orderstatus 2 to 1
 	public List<OrderItems> updateOrderStatusTo1(int custId, int itemId, int statusId){
 		List<OrderItems> orderItemsRecords = orderItemsRepo.updateOrderStatusTo1(custId, itemId, statusId);	
 		return orderItemsRecords;
 	}
-}
+	
 
+	//delete item from cart or wishlist
+	public boolean deleteItem (int custId, int itemId, int statusId){
+		boolean deleted = orderItemsRepo.deleteItem(custId, itemId, statusId);	
+		return deleted;
+	}
+	
+}

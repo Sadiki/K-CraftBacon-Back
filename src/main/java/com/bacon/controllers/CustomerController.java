@@ -1,5 +1,4 @@
 
-
 package com.bacon.controllers;
 
 import java.io.IOException;
@@ -47,7 +46,8 @@ public class CustomerController {
 
 		// map the incoming Json to an array for quick reference
 		Map<String, String> loginCredentials = new HashMap<String, String>();
-		loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, new TypeReference<Map<String, String>>(){});
+		loginCredentials = new ObjectMapper().readValue(loginCredentialsJson, new TypeReference<Map<String, String>>() {
+		});
 
 		String username = loginCredentials.get("username");
 		String password = loginCredentials.get("password");
@@ -96,12 +96,12 @@ public class CustomerController {
 		Map<String, String> customerUpdate = new HashMap<String, String>();
 		customerUpdate = new ObjectMapper().readValue(customerUpdateJson, new TypeReference<Map<String, String>>() {
 		});
-		System.out.println(customerUpdate);
-		boolean updated = custService.customerUpdate(customerUpdate);
-		System.out.println();
+
+		boolean updated = custService.register(customerUpdate);
+
 		if (!updated)
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE); // Tried to update a unique field with a value
-																	// already present in the table(username/email)
+																	// already preasent in the table(username/email)
 
 		return new ResponseEntity<>(HttpStatus.OK);
 
@@ -117,24 +117,17 @@ public class CustomerController {
 		});
 
 		int custId = Integer.parseInt(update.get("cust_id"));
-		int option = Integer.parseInt(update.get("newsletter"));
+		boolean option = Boolean.parseBoolean(update.get("option"));
 
 		// depending on the value to option, determines whether the newsletter is
 		// updated to subscribed or unsubscribed
-		switch (option) {
-		case 1: 
+		if (option) {
 			custService.newsletterSignup(custId);
 			return new ResponseEntity<>(HttpStatus.OK);
-		case 0:
+		} else {
 			custService.newsletterUnsubscribe(custId);
 			return new ResponseEntity<>(HttpStatus.OK);
-		default:
-			break;
 		}
-			
-		
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		
 
 	}
 
