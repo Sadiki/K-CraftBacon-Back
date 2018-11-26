@@ -53,6 +53,7 @@ public class OrdersController {
         userInfo = new ObjectMapper().readValue(userInfoJson, new TypeReference<Map<String, String>>(){});
         int custId = Integer.parseInt(userInfo.get("cust_id"));
         List<Orders> orderItems = ordersService.getAllOrdersByCustId(custId);
+        System.out.println(orderItems.get(0).getCreatedDate());
         return new ResponseEntity<List<Orders>>(orderItems, HttpStatus.OK);
 	}
 	
@@ -78,10 +79,10 @@ public class OrdersController {
         return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
 	}
 	
+	//helper method for create new order
 	public boolean updateOrderStatusTo3(int custId, Orders newOrder) {
 		List<OrderItems> orderItems = ordersService.getAllOrderItemsById(custId, 1);
 		boolean purchasedItems = ordersService.updateOrderStatusTo3(orderItems, newOrder);
-		System.out.println("purchasedItems...." + purchasedItems);//*************
 		if (purchasedItems == false) {
 			return false;
 		}
