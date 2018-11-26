@@ -78,10 +78,10 @@ public class OrdersController {
         return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
 	}
 	
+	//helper method for create new order
 	public boolean updateOrderStatusTo3(int custId, Orders newOrder) {
 		List<OrderItems> orderItems = ordersService.getAllOrderItemsById(custId, 1);
 		boolean purchasedItems = ordersService.updateOrderStatusTo3(orderItems, newOrder);
-		System.out.println("purchasedItems...." + purchasedItems);//*************
 		if (purchasedItems == false) {
 			return false;
 		}
