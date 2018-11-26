@@ -38,8 +38,8 @@ public class CreditCardService {
 	}
 	
 	//Retrieve all card information
-	public List<CreditCardInfo> getAll(int userId) {
-		return cardRepo.getByUserId(userId);
+	public List<CreditCardInfo> getAll() {
+		return cardRepo.getAll();
 	}
 	
 	
