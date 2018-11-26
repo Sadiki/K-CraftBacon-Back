@@ -53,6 +53,7 @@ public class OrdersController {
         userInfo = new ObjectMapper().readValue(userInfoJson, new TypeReference<Map<String, String>>(){});
         int custId = Integer.parseInt(userInfo.get("cust_id"));
         List<Orders> orderItems = ordersService.getAllOrdersByCustId(custId);
+        System.out.println(orderItems.get(0).getCreatedDate());
         return new ResponseEntity<List<Orders>>(orderItems, HttpStatus.OK);
 	}
 	
