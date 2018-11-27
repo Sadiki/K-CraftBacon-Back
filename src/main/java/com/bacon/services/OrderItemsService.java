@@ -25,9 +25,9 @@ public class OrderItemsService {
 	public OrderItemsService() {}
 
 	//add item to cart
-	public void addOrderItem(int custId, int quantity, int inventory) {
+	public void addOrderItem(int custId, int quantity, int inventory,int status) {
 		Inventory inventoryItem = orderItemsRepo.getById(inventory);
-		orderItemsRepo.addOrderItem(custId, quantity, inventoryItem);
+		orderItemsRepo.addOrderItem(custId, quantity, inventoryItem ,status);
 	}
 	
 	//get items by custId and orderstatus 1 for cart items

@@ -41,10 +41,11 @@ public class OrderItemsController {
 		Map<String, String> itemDetails = new HashMap<String, String>();
         itemDetails = new ObjectMapper().readValue(newOrderItemJson, new TypeReference<Map<String, String>>(){});
         
-        int custId = Integer.parseInt(itemDetails.get("custId"));
+        int custId = Integer.parseInt(itemDetails.get("cust_id"));
         int quantity = Integer.parseInt(itemDetails.get("quantity"));
         int inventory = Integer.parseInt(itemDetails.get("inventory"));
-        orderItemsService.addOrderItem(custId, quantity, inventory);
+        int status = Integer.parseInt(itemDetails.get("status"));
+        orderItemsService.addOrderItem(custId, quantity, inventory,status);
 		return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
 	}
 		
