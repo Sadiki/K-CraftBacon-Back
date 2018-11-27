@@ -62,7 +62,7 @@ public class CustomerService {
 	public boolean customerUpdate(Map<String, String> customerUpdate) {
 		System.out.println("Inside CustomerService: update method");
 		List<Customers> existingCust = custRepo.getAll();
-
+		
 		int id = Integer.parseInt(customerUpdate.get("cust_id"));
 		String firstname = customerUpdate.get("firstName");
 		String lastname = customerUpdate.get("lastName");
@@ -77,10 +77,10 @@ public class CustomerService {
 		int newsletter = Integer.parseInt(customerUpdate.get("newsletter"));
 
 		// validations
-		for (Customers c : existingCust)
-			if (c.getUsername().equals(username) || c.getEmail().equals(email))
-				return false;
-
+		for (Customers c : existingCust) {
+            if ((c.getUsername().equals(username) || c.getEmail().equals(email)) && (!(c.getCust_id() == id)))
+            	return false;
+		}
 		// make a call to the repository layer to construct and insert a new user
 		custRepo.updateCustomer(id, firstname, lastname, username, password, email, phoneNumber, streetAddress, city,
 				state, zip, newsletter);

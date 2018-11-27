@@ -11,14 +11,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bacon.models.CreditCardInfo;
 import com.bacon.services.CreditCardService;
@@ -39,6 +36,12 @@ public class CreditCardController {
 		this.cardService = cardService;
 	}
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity< List<CreditCardInfo>> getAll(){
+    	System.out.println("here...");
+        return new ResponseEntity<>(cardService.getAll(), HttpStatus.OK);
+    }
+	
 	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity addCard(@RequestBody String newCardInfoJson) throws JsonParseException, JsonMappingException, IOException {
 
@@ -52,7 +55,7 @@ public class CreditCardController {
 		String fullName  = cardDetails.get("fullName");
 		int securityCode = Integer.parseInt(cardDetails.get("securityCode")); 
 		String expirationDate =cardDetails.get("expirationDate");
-		int custId = Integer.parseInt(cardDetails.get("custId"));
+		int custId = Integer.parseInt(cardDetails.get("cust_id"));
 		
 		if(cardService.addCard(cardNumber, fullName, securityCode, expirationDate, custId))
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -95,14 +98,13 @@ public class CreditCardController {
 		
 	}
 	
-	@DeleteMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/delete", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Boolean> deleteCard(@RequestBody String deleteCardJson) throws JsonParseException, JsonMappingException, IOException {
 		
 		Map<String, String> deleteDetails = new HashMap<String, String>();
 		deleteDetails = new ObjectMapper().readValue(deleteCardJson, new TypeReference<Map<String, String>>(){});
-		
-		int cardNumber = Integer.parseInt(deleteDetails.get("cardNumber"));
-		
+		System.out.println(deleteDetails);
+		String cardNumber = deleteDetails.get("cardNumber");
 		boolean cardDeleted = cardService.deleteCard(cardNumber);
 		
 		if(!cardDeleted) {

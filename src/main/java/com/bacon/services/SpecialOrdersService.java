@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bacon.models.Inventory;
 import com.bacon.models.Orders;
 import com.bacon.models.SpecialOrders;
 import com.bacon.repos.SpecialOrdersRepo;
@@ -30,6 +31,11 @@ public class SpecialOrdersService {
 	public SpecialOrders addSpecialOrder(SpecialOrders newOrder) {
 		return specialOrdersRepo.add(newOrder);
 	}
+	
+//	//add item to cart
+//	public void addOrderItem(int specialOrderId) {
+//		orderItemsRepo.addOrderItem(custId, quantity, inventoryItem);
+//	}
 	
 	
 }
