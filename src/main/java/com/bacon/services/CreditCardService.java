@@ -45,7 +45,7 @@ public class CreditCardService {
 	
 	
 	//Delete a card
-	public boolean deleteCard(int cardNumber) {
+	public boolean deleteCard(String cardNumber) {
 		return cardRepo.deleteCard(cardNumber);
 	}
 	
