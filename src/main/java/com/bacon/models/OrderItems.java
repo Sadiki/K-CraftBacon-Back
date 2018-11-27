@@ -44,7 +44,10 @@ public class OrderItems {
 	@JoinColumn(name="order_id")
 	private Orders orders;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.DETACH,
+						CascadeType.MERGE,
+						CascadeType.PERSIST,
+						CascadeType.REFRESH})
 	@JoinColumn(name="item_id")
 	private Inventory inventory;
 

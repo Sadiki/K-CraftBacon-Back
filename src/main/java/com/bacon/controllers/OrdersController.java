@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bacon.models.OrderItems;
 import com.bacon.models.Orders;
-import com.bacon.services.OrderItemsService;
 import com.bacon.services.OrdersService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 @CrossOrigin
 @Controller
@@ -48,13 +48,14 @@ public class OrdersController {
 	
 	//get all orders by userId
 	@PostMapping(value = "/past-orders" ,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Orders>> getAllOrdersByCustId(@RequestBody String userInfoJson) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity <ArrayNode>  getAllOrdersByCustId(@RequestBody String userInfoJson) throws JsonParseException, JsonMappingException, IOException{
 		Map<String, String> userInfo = new HashMap<String, String>();
         userInfo = new ObjectMapper().readValue(userInfoJson, new TypeReference<Map<String, String>>(){});
         int custId = Integer.parseInt(userInfo.get("cust_id"));
-        List<Orders> orderItems = ordersService.getAllOrdersByCustId(custId);
-        System.out.println(orderItems.get(0).getCreatedDate());
-        return new ResponseEntity<List<Orders>>(orderItems, HttpStatus.OK);
+        
+        //Send back the retrieved information 
+        ArrayNode  orderItems = ordersService.getAllOrdersByCustId(custId);
+        return new ResponseEntity<ArrayNode>(orderItems, HttpStatus.OK);
 	}
 	
 	//create new order
