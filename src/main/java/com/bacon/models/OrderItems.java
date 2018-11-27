@@ -51,7 +51,7 @@ public class OrderItems {
 	@JoinColumn(name="item_id")
 	private Inventory inventory;
 
-	OrderItems() {}
+	public OrderItems() {}
 
 	public OrderItems(int custId, int quantity, int status, SpecialOrders specialOrder, Orders orders,
 			Inventory inventory) {

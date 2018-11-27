@@ -43,7 +43,7 @@ public class OrderItemsController {
         
         int custId = Integer.parseInt(itemDetails.get("cust_id"));
         int quantity = Integer.parseInt(itemDetails.get("quantity"));
-        int inventory = Integer.parseInt(itemDetails.get("inventory"));
+        int inventory = Integer.parseInt(itemDetails.get("item_id"));
         int status = Integer.parseInt(itemDetails.get("status"));
         orderItemsService.addOrderItem(custId, quantity, inventory,status);
 		return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
