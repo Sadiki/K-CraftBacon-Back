@@ -26,11 +26,11 @@ public class OrderItemsRepo {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	//add item to cart
-	public void addOrderItem(int custId, int quantity, Inventory inventoryItem) {
+	//add item to cart/status
+	public void addOrderItem(int custId, int quantity, Inventory inventoryItem ,int status) {
 		System.out.println("repo");
 		Session s = sessionFactory.getCurrentSession();
-		s.save(new OrderItems(custId, quantity, 1, inventoryItem));
+		s.save(new OrderItems(custId, quantity ,status , inventoryItem));
 	}
 	
 	//get items by custId and orderstatus 1 for cart items and wishlist
