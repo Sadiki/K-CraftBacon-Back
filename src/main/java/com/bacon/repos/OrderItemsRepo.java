@@ -93,8 +93,13 @@ public class OrderItemsRepo {
 			System.out.println("item doesn't exist");
 			return false;
 		}
+//		Query deleteItemsQuery = s.createQuery("from OrderItems where cust_id Like ?0 and status Like ?1 and item_id like ?2", OrderItems.class);
+//		orderItemsQuery.setParameter(0, custId);
+//		orderItemsQuery.setParameter(1, statusId);
+//		orderItemsQuery.setParameter(2, itemId);
 
 		OrderItems item = orderItems.get(0);
+		System.out.println(item);
 		s.delete(item);
 		return true;
 	}

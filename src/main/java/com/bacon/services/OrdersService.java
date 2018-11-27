@@ -1,6 +1,7 @@
 package com.bacon.services;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bacon.models.OrderItems;
 import com.bacon.models.Orders;
 import com.bacon.repos.OrdersRepo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 @Transactional
@@ -27,11 +31,36 @@ public class OrdersService {
 	}
 	
 	//get all orders by userId
-	public List<Orders> getAllOrdersByCustId(int custId){
-		List<Orders> orderRecords = ordersRepo.getAllOrdersByCustId(custId);
-		System.out.println(orderRecords);
-		return orderRecords;	
-	}
+		public ArrayNode getAllOrdersByCustId(int custId){
+			List<Orders> orderRecords = ordersRepo.getAllOrdersByCustId(custId);
+			
+			// create a map object to be returned as well as other helper variables(if needed)
+			ArrayNode ordersList = new ObjectMapper().createArrayNode();
+			
+			for (Orders ord : orderRecords) {
+				ObjectNode convertedOrders = new ObjectMapper().createObjectNode();
+				// populate the JSON relevant information
+				convertedOrders.put("orderId", ord.getOrderId());
+				convertedOrders.put("customers", ord.getCustomers().getCust_id());
+				convertedOrders.put("orderStatusId",ord.getOrderStatusId());
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				convertedOrders.put("createdDate", ord.getCreatedDate().format(formatter).toString());
+				
+				// if there exist an order update convert it as well
+				if(ord.getOrderUpdate()!= null) convertedOrders.put("orderUpdate", ord.getOrderUpdate().format(formatter).toString());
+				convertedOrders.put("shippingStatus", ord.getShippingStatus());
+				convertedOrders.put("deliveryMethodId", ord.getDeliveryMethodId());
+				convertedOrders.put("shippingPrice", ord.getShippingPrice());
+				convertedOrders.put("orderPrice", ord.getOrderPrice());
+				
+				//add the converted object to the orders list to be returned
+				ordersList.add(convertedOrders);
+
+				
+			}
+			System.out.println(ordersList);
+			return ordersList;	
+		}
 	
 	//create new order
 	public Orders addNewOrder(int custId, int orderStatusId, LocalDateTime time, int shippingStatus, int deliveryMethod, double shippingPrice, double orderPrice) {

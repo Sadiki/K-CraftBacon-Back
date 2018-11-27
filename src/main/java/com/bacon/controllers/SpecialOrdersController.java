@@ -1,6 +1,9 @@
 package com.bacon.controllers;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bacon.models.SpecialOrders;
 import com.bacon.services.SpecialOrdersService;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @CrossOrigin
 @Controller
 @RequestMapping(value="/bacon/craft")
@@ -24,14 +31,12 @@ public class SpecialOrdersController {
 	
 	@Autowired
 	public SpecialOrdersController (SpecialOrdersService specialOrdersService) {
-		System.out.println("Controller");
 		this.specialOrdersService = specialOrdersService;
 	}
 	
 	//gets all special orders. no practical use. probably going to delete
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<SpecialOrders>> getAll(){
-		System.out.println("controller...");	
 		List<SpecialOrders> orders =  specialOrdersService.getAll();
 		return new ResponseEntity<List<SpecialOrders>>(orders,HttpStatus.OK);
 	}
@@ -43,7 +48,17 @@ public class SpecialOrdersController {
 			return new ResponseEntity<SpecialOrders>(newOrder, HttpStatus.NOT_ACCEPTABLE);
 		}
 		SpecialOrders order = specialOrdersService.addSpecialOrder(newOrder);
+		int specialOrderId = order.getSpecialOrderId();
+//		int custId = or
+		
 		return new ResponseEntity<SpecialOrders>(order, HttpStatus.CREATED); //Http status code = 201
 	}
+	
+//	//add new order to orderItems table
+//	public ResponseEntity addOrderItem(int specialOrderId) throws JsonParseException, JsonMappingException, IOException{
+//        int custId = Integer.parseInt(itemDetails.get("custId"));
+//        specialOrdersService.addOrderItem(specialOrderId);
+//		return new ResponseEntity<>(HttpStatus.CREATED); //Http status code = 201
+//	}
 	
 }

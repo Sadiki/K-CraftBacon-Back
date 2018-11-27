@@ -97,7 +97,7 @@ public class CustomerController {
 		customerUpdate = new ObjectMapper().readValue(customerUpdateJson, new TypeReference<Map<String, String>>() {
 		});
 
-		boolean updated = custService.register(customerUpdate);
+		boolean updated = custService.customerUpdate(customerUpdate);
 
 		if (!updated)
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE); // Tried to update a unique field with a value

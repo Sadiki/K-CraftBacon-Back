@@ -63,7 +63,7 @@ public class CreditCardRepository {
 	}
 	
 	//Delete a card
-	public boolean deleteCard(int cardNumber) {
+	public boolean deleteCard(String cardNumber) {
 		
 		Session s = sessionFactory.getCurrentSession();
 		CreditCardInfo card = s.get(CreditCardInfo.class, cardNumber);
